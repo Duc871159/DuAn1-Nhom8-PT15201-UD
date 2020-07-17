@@ -10,11 +10,10 @@ package duan1.nhom8.helper;
  * @author User
  */
 public class ShareHelper {
-<<<<<<< HEAD
+
+    int a = 0;
+
     public ShareHelper(){
 
     }
-=======
-    
->>>>>>> ce1da512f30e9d7b04efff48fa9c3b79734bf78e
 }
