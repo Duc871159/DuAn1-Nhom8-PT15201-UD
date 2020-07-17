@@ -10,5 +10,7 @@ package duan1.nhom8.helper;
  * @author User
  */
 public class ShareHelper {
-    
+    public ShareHelper(){
+
+    }
 }
