@@ -23,7 +23,7 @@ public class ChaoJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
           setLocationRelativeTo(null);
-        new Timer(5, new ActionListener() {
+        new Timer(20, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int value = ProgressBar1.getValue();
