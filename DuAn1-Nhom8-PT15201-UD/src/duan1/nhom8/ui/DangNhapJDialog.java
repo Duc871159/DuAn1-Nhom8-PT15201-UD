@@ -5,6 +5,13 @@
  */
 package duan1.nhom8.ui;
 
+import duan1.nhom8.dao.NguoiDungDao;
+import duan1.nhom8.helper.DialogHelper;
+import duan1.nhom8.helper.UHelper;
+import duan1.nhom8.helper.ShareHelper;
+import duan1.nhom8.model.NguoiDung;
+import java.util.List;
+
 /**
  *
  * @author Admin
@@ -17,6 +24,41 @@ public class DangNhapJDialog extends javax.swing.JDialog {
     public DangNhapJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        txtTenDN.setText("Ducna13");
+        txxMk.setText("123");
+    }
+    
+    NguoiDungDao dao = new NguoiDungDao();
+    
+    void login(){
+        if (!UHelper.checkNull(txtTenDN, "Tên đăng nhập")) {
+            return;
+        }
+        if (!UHelper.checkNull(txxMk, "Mật khẩu")) {
+            return;
+        }
+        String maNguoiDung = txtTenDN.getText();
+        String matKhauInput = new String(txxMk.getPassword());
+        try {
+            NguoiDung nguoidung = dao.findById(maNguoiDung);
+            if (nguoidung != null) {
+                String matKhau = nguoidung.getMatKhau();
+                if (matKhauInput.equals(matKhau)) {
+                    ShareHelper.USER = nguoidung;
+                    DialogHelper.alert(this, "Đăng nhập thành công");
+                    System.out.println(nguoidung);
+                    this.dispose();
+                } else{
+                    DialogHelper.alert(this, "Sai mật khẩu !");
+                }
+            } else{
+                DialogHelper.alert(this, "Sai tên đăng nhâp !");
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn Login: " + e);
+            System.out.println("duan1.nhom8.ui.DangNhapJDialog.login(): " + e);
+        }
     }
 
     /**
@@ -59,6 +101,11 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         btDangNhap.setBackground(new java.awt.Color(0, 204, 204));
         btDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Globe.png"))); // NOI18N
         btDangNhap.setText("Đăng nhập");
+        btDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDangNhapActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,6 +164,10 @@ public class DangNhapJDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangNhapActionPerformed
+        login();
+    }//GEN-LAST:event_btDangNhapActionPerformed
 
     /**
      * @param args the command line arguments

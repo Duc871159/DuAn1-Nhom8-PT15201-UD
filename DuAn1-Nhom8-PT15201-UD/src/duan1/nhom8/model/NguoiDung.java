@@ -22,6 +22,21 @@ public class NguoiDung {
     private String email;
     private String soDienThoai;
 
+    public NguoiDung() {
+    }
+
+    public NguoiDung(String maNguoiDung, String matKhau, boolean vaiTro, String hoTen, String diaChi, boolean gioiTinh, Date ngaySinh, String email, String soDienThoai) {
+        this.maNguoiDung = maNguoiDung;
+        this.matKhau = matKhau;
+        this.vaiTro = vaiTro;
+        this.hoTen = hoTen;
+        this.diaChi = diaChi;
+        this.gioiTinh = gioiTinh;
+        this.ngaySinh = ngaySinh;
+        this.email = email;
+        this.soDienThoai = soDienThoai;
+    }
+    
     public String getMaNguoiDung() {
         return maNguoiDung;
     }
@@ -93,4 +108,10 @@ public class NguoiDung {
     public void setSoDienThoai(String soDienThoai) {
         this.soDienThoai = soDienThoai;
     }
+
+    @Override
+    public String toString() {
+        return "NguoiDung{" + "hoTen=" + hoTen + '}';
+    }
+    
 }
