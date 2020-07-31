@@ -57,7 +57,6 @@ public class DangNhapJDialog extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi truy vấn Login: " + e);
-            System.out.println("duan1.nhom8.ui.DangNhapJDialog.login(): " + e);
         }
     }
 
