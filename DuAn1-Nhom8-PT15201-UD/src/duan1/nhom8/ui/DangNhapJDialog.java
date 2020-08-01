@@ -9,6 +9,8 @@ import duan1.nhom8.dao.NguoiDungDao;
 import duan1.nhom8.helper.DialogHelper;
 import duan1.nhom8.helper.UHelper;
 import duan1.nhom8.helper.ShareHelper;
+import duan1.nhom8.i.NguoiDungInterface;
+import duan1.nhom8.impl.NguoiDungImpl;
 import duan1.nhom8.model.NguoiDung;
 import java.util.List;
 
@@ -29,36 +31,39 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         txxMk.setText("123");
     }
     
-    NguoiDungDao dao = new NguoiDungDao();
+    NguoiDungInterface nd = new NguoiDungImpl();
     
-    void login(){
-        if (!UHelper.checkNull(txtTenDN, "Tên đăng nhập")) {
-            return;
-        }
-        if (!UHelper.checkNull(txxMk, "Mật khẩu")) {
-            return;
-        }
-        String maNguoiDung = txtTenDN.getText();
-        String matKhauInput = new String(txxMk.getPassword());
-        try {
-            NguoiDung nguoidung = dao.findById(maNguoiDung);
-            if (nguoidung != null) {
-                String matKhau = nguoidung.getMatKhau();
-                if (matKhauInput.equals(matKhau)) {
-                    ShareHelper.USER = nguoidung;
-                    DialogHelper.alert(this, "Đăng nhập thành công");
-                    System.out.println(nguoidung);
-                    this.dispose();
-                } else{
-                    DialogHelper.alert(this, "Sai mật khẩu !");
-                }
-            } else{
-                DialogHelper.alert(this, "Sai tên đăng nhâp !");
-            }
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Lỗi truy vấn Login: " + e);
-        }
-    }
+//    NguoiDungDao dao = new NguoiDungDao();
+    
+//    void login(){
+//        if (!UHelper.checkNull(txtTenDN, "Tên đăng nhập")) {
+//            return;
+//        }
+//        if (!UHelper.checkNull(txxMk, "Mật khẩu")) {
+//            return;
+//        }
+//        String maNguoiDung = txtTenDN.getText();
+//        String matKhauInput = new String(txxMk.getPassword());
+//        try {
+//            NguoiDung nguoidung = dao.findById(maNguoiDung);
+//            if (nguoidung != null) {
+//                String matKhau = nguoidung.getMatKhau();
+//                if (matKhauInput.equals(matKhau)) {
+//                    ShareHelper.USER = nguoidung;
+//                    DialogHelper.alert(this, "Đăng nhập thành công");
+//                    System.out.println(nguoidung);
+//                    this.dispose();
+//                } else{
+//                    DialogHelper.alert(this, "Sai mật khẩu !");
+//                }
+//            } else{
+//                DialogHelper.alert(this, "Sai tên đăng nhâp !");
+//            }
+//        } catch (Exception e) {
+//            DialogHelper.alert(this, "Lỗi truy vấn Login: " + e);
+//        }
+//    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -165,7 +170,10 @@ public class DangNhapJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangNhapActionPerformed
-        login();
+        if (nd.login(txtTenDN, txxMk)) {
+            this.dispose();
+        } else{
+        }
     }//GEN-LAST:event_btDangNhapActionPerformed
 
     /**
