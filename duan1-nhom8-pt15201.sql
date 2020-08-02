@@ -13,6 +13,7 @@ Create table sach(
 	loaiSach	Nvarchar(50) null,
 	tacGia		Nvarchar(50) not null,
 	nhaXuatBan	Nvarchar(100) not null,
+	viTri		Nvarchar(100),
 	soLuong		int
 )
 
@@ -71,9 +72,9 @@ Select * from nguoiDoc
 Select * from phieuMuon
 Select * from trangThaiSach
 
-Insert into sach values(N'Chiến Tranh Tiền Tệ - Sự Thống Trị Của Quyền Lực Tài Chính', N'Kinh tế', N'Song Hongbing', N'NXB Lao Động', 3)
-Insert into sach values(N'Tiền Đấu Với Vàng', N'Kinh tế', N'James Rickards', N'NXB Tài Chính', 1)
-Insert into sach values(N'Sổ Tay Nhà Thôi Miên', N'Tâm lý', N'Cao Minh', N'NXB Thế Giới', 2)
+Insert into sach values(N'Chiến Tranh Tiền Tệ - Sự Thống Trị Của Quyền Lực Tài Chính', N'Kinh tế', N'Song Hongbing', N'NXB Lao Động', N'Kệ A3 - Hàng 1', 3)
+Insert into sach values(N'Tiền Đấu Với Vàng', N'Kinh tế', N'James Rickards', N'NXB Tài Chính', N'Kệ A3 - Hàng 1', 1)
+Insert into sach values(N'Sổ Tay Nhà Thôi Miên', N'Tâm lý', N'Cao Minh', N'NXB Thế Giới', N'Kệ A1 - Hàng 4', 2)
 
 Insert into nguoiDung values('ducna13', '123', 1, N'Nguyễn Anh Đức', N'Hà Nội', 1, '12/13/2000', 'Ducna13@gmail.com', '0333188195')
 Insert into nguoiDung values('nguoidung1', '321', 0, N'Người dùng 1', N'Hà Nội', 1, '11/14/1994', 'nd01@gmail.com', '0333183456')
