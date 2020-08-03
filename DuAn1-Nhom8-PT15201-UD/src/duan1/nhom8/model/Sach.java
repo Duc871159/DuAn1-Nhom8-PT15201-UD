@@ -18,6 +18,15 @@ public class Sach {
     private String tacGia;
     private Date ngayXuatBan;
     private int soLuong;
+    private String viTri;
+
+    public String getViTri() {
+        return viTri;
+    }
+
+    public void setViTri(String viTri) {
+        this.viTri = viTri;
+    }
 
     public int getMaSach() {
         return maSach;
