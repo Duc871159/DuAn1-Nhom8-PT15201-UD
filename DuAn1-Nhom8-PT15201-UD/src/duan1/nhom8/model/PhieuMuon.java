@@ -15,6 +15,9 @@ public class PhieuMuon {
     private int maPhieuMuon;
     private Date NgayMuon;
     private Date NgayTra;
+    private int maNguoiDoc;
+    private int maNhanVien;
+    private boolean trangThai;
 
     public int getMaPhieuMuon() {
         return maPhieuMuon;
@@ -55,6 +58,13 @@ public class PhieuMuon {
     public void setMaNhanVien(int maNhanVien) {
         this.maNhanVien = maNhanVien;
     }
-    private int maNguoiDoc;
-    private int maNhanVien;
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+    
 }

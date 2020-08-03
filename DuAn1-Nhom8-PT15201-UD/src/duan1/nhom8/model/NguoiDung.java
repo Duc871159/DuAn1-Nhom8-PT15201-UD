@@ -21,6 +21,15 @@ public class NguoiDung {
     private Date ngaySinh;
     private String email;
     private String soDienThoai;
+    private String hinhAnh;
+
+    public String getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
+    }
 
     public NguoiDung() {
     }

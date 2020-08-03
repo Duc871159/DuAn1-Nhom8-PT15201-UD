@@ -19,7 +19,16 @@ public class Sach {
     private Date ngayXuatBan;
     private int soLuong;
     private String viTri;
+    private String hinhAnh;
 
+    public String getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
+    }
+    
     public String getViTri() {
         return viTri;
     }
