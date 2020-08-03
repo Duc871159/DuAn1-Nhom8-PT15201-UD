@@ -91,7 +91,7 @@
                   </Group>
               </Group>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="326" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -156,13 +156,13 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="rdNam" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="rdNu" min="-2" max="-2" attributes="0"/>
-                              </Group>
                               <Component id="txtDiaChi" min="-2" pref="150" max="-2" attributes="0"/>
                               <Component id="txtEmail" min="-2" pref="147" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="rdNam" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="rbNu" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -171,7 +171,7 @@
                           <Component id="txtNgaySinh" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -197,7 +197,7 @@
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="rdNam" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rdNu" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rbNu" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="txtEmail" min="-2" max="-2" attributes="0"/>
@@ -296,17 +296,18 @@
             <Property name="text" type="java.lang.String" value="Nam"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rdNu">
+        <Component class="javax.swing.JTextField" name="txtEmail">
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="rbNu">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="N&#x1eef;"/>
-            <Property name="borderPainted" type="boolean" value="true"/>
-            <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtEmail">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbNuActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -445,15 +446,15 @@
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="301" max="-2" attributes="0"/>
-                  <Component id="btCuoi" min="-2" pref="75" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="326" max="-2" attributes="0"/>
+                  <Component id="btDau" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btNext" min="-2" pref="71" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="btBack" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btDau" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="335" max="32767" attributes="0"/>
+                  <Component id="btNext" min="-2" pref="71" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btCuoi" min="-2" pref="75" max="-2" attributes="0"/>
+                  <EmptySpace pref="324" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
