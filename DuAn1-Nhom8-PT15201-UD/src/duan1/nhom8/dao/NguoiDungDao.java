@@ -29,6 +29,7 @@ public class NguoiDungDao {
         model.setNgaySinh(rs.getDate("ngaySinh"));
         model.setEmail(rs.getString("email"));
         model.setSoDienThoai(rs.getString("soDienThoai"));
+        model.setHinhAnh(rs.getString("hinhAnh"));
         return model;
     }
     
@@ -55,8 +56,8 @@ public class NguoiDungDao {
         return list;
     }
     
-    public void insert(NguoiDung model) {
-        String sql = "INSERT INTO NguoiDung (maNguoiDung, MatKhau, vaiTro, HoTen, diaChi, gioiTinh, ngaySinh, email, soDienThoai) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public void save(NguoiDung model) {
+        String sql = "INSERT INTO NguoiDung (maNguoiDung, MatKhau, vaiTro, HoTen, diaChi, gioiTinh, ngaySinh, email, soDienThoai, hinhAnh) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             JdbcHelper.executeUpdate(sql,
                     model.getMaNguoiDung(),
@@ -67,7 +68,17 @@ public class NguoiDungDao {
                     model.isGioiTinh(),
                     model.getNgaySinh(),
                     model.getEmail(),
-                    model.getSoDienThoai());
+                    model.getSoDienThoai(),
+                    model.getHinhAnh());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void delete(String maNguoiDung) {
+        String sql = "Delete From NguoiDung WHERE MaNguoiDung = ?";
+        try {
+            JdbcHelper.executeUpdate(sql, maNguoiDung);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -82,6 +93,23 @@ public class NguoiDungDao {
         String sql = "SELECT * FROM NguoiDung WHERE maNguoiDung = ?";
         List<NguoiDung> list = select(sql, maNguoiDung);
         return list.size() > 0 ? list.get(0) : null;
+    }
+    
+    public NguoiDung findByEmail(String email) {
+        String sql = "SELECT * FROM NguoiDung WHERE email = ?";
+        List<NguoiDung> list = select(sql, email);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+    
+    public NguoiDung findBySDT(String sdt) {
+        String sql = "SELECT * FROM NguoiDung WHERE soDienThoai = ?";
+        List<NguoiDung> list = select(sql, sdt);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+    public List<NguoiDung> selectByKeyword(String key1, String key2, String key3, String key4, String key5, String key6) {
+        String sql = "Select * FROM NguoiDung \n" +
+"where HoTen like ? or maNguoiDung like ? or DiaChi like ? or Email like ? or SoDienThoai like ? or ngaySinh like ?";
+        return select(sql, "%" + key1 + "%", "%" + key2 + "%", "%" + key3 + "%", "%" + key4 + "%", "%" + key5 + "%", "%" + key6 + "%");
     }
     
 }

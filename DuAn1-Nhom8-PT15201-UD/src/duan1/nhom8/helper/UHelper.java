@@ -5,6 +5,9 @@
  */
 package duan1.nhom8.helper;
 
+import duan1.nhom8.model.NguoiDung;
+import java.sql.ResultSet;
+import java.util.List;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -51,5 +54,6 @@ public class UHelper {
        }
        return true;
    }
+   
 //  
 }

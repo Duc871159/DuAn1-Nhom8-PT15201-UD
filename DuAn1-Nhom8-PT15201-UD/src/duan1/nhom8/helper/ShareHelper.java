@@ -26,25 +26,25 @@ public class ShareHelper {
 //        APP_ICON = new ImageIcon(ShareHelper.class.getResource(file)).getImage();
 //        APP_ICON_1 = new ImageIcon(ShareHelper.class.getResource(file));
 //    }
-//    public static boolean saveLogo(File file){
-//       File dir = new File("src/logo");
-//       if(!dir.exists()){
-//           dir.mkdir();
-//       }
-//       File newFile = new File(dir,file.getName());
-//        try {
-//            Path source = Paths.get(file.getAbsolutePath());
-//            Path destination = Paths.get(newFile.getAbsolutePath());
-//            Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
-//            return true;
-//        } catch (Exception e) {
-//            return false;
-//        }
-//    }
-//    public static ImageIcon readLogo(String fileName){
-//        File path = new File("src/logo",fileName);
-//        return new ImageIcon(path.getAbsolutePath());
-//    }
+    public static boolean saveLogo(File file){
+       File dir = new File("src/logo");
+       if(!dir.exists()){
+           dir.mkdir();
+       }
+       File newFile = new File(dir,file.getName());
+        try {
+            Path source = Paths.get(file.getAbsolutePath());
+            Path destination = Paths.get(newFile.getAbsolutePath());
+            Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public static ImageIcon readLogo(String fileName){
+        File path = new File("src/logo",fileName);
+        return new ImageIcon(path.getAbsolutePath());
+    }
     
     public static NguoiDung USER = null;
     public static void logoff(){
