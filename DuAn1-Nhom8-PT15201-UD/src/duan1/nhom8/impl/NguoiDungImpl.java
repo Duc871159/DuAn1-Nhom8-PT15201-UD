@@ -15,6 +15,7 @@ import duan1.nhom8.i.NguoiDungInterface;
 import duan1.nhom8.model.NguoiDoc;
 import duan1.nhom8.model.NguoiDung;
 import duan1.nhom8.ui.DangNhapJDialog;
+import duan1.nhom8.ui.NguoiDungJFrame;
 import java.awt.HeadlessException;
 import java.io.File;
 import java.util.Date;
@@ -32,11 +33,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author User
  */
-public class NguoiDungImpl implements NguoiDungInterface{
+public class NguoiDungImpl implements NguoiDungInterface {
 
     NguoiDungDao dao = new NguoiDungDao();
     NguoiDocDao nguoiDocDao = new NguoiDocDao();
-    
+
     @Override
     public boolean login(JTextField txtTenDN, JPasswordField txxMk) {
         if (!UHelper.checkNull(txtTenDN, "Tên đăng nhập")) {
@@ -56,11 +57,11 @@ public class NguoiDungImpl implements NguoiDungInterface{
                     DialogHelper.alert(null, "Đăng nhập thành công");
                     System.out.println(nguoidung);
                     return true;
-                } else{
+                } else {
                     DialogHelper.alert(null, "Sai mật khẩu !");
                     return false;
                 }
-            } else{
+            } else {
                 DialogHelper.alert(null, "Sai tên đăng nhâp !");
                 return false;
             }
@@ -71,8 +72,6 @@ public class NguoiDungImpl implements NguoiDungInterface{
         return false;
     }
 
-
-    
     @Override
     public void load(JTable tbDSND, JTextField txtTimKiem) {
         DefaultTableModel model = (DefaultTableModel) tbDSND.getModel();
@@ -107,7 +106,8 @@ public class NguoiDungImpl implements NguoiDungInterface{
         model.setMatKhau(new String(txxmatKhau.getPassword()));
         if (rbNhanVien.isSelected()) {
             model.setVaiTro(true);
-        } if (rbNguoiDoc.isSelected()) {
+        }
+        if (rbNguoiDoc.isSelected()) {
             model.setVaiTro(false);
         }
         model.setHoTen(txtHoTen.getText());
@@ -118,7 +118,8 @@ public class NguoiDungImpl implements NguoiDungInterface{
         model.setEmail(txtEmail.getText());
         if (rbNam.isSelected()) {
             model.setGioiTinh(true);
-        } if (rbNu.isSelected()) {
+        }
+        if (rbNu.isSelected()) {
             model.setGioiTinh(false);
         }
         model.setDiaChi(txtDiaChi.getText());
@@ -129,27 +130,36 @@ public class NguoiDungImpl implements NguoiDungInterface{
             NguoiDung sdt = dao.findBySDT(txtSoDienThoai.getText());
             if (!UHelper.checkNull(txtTaiKhoan, "Tên tài khoản")) {
                 return false;
-            } if (!UHelper.checkNull(txxmatKhau, "Mật khẩu")) {
+            }
+            if (!UHelper.checkNull(txxmatKhau, "Mật khẩu")) {
                 return false;
-            } if (!UHelper.checkNull(txtHoTen, "Họ tên")) {
+            }
+            if (!UHelper.checkNull(txtHoTen, "Họ tên")) {
                 return false;
-            } if (!UHelper.checkNull(txtEmail, "Email")) {
+            }
+            if (!UHelper.checkNull(txtEmail, "Email")) {
                 return false;
-            } if (!UHelper.checkNull(txtSoDienThoai, "Số điện thoại")) {
+            }
+            if (!UHelper.checkNull(txtSoDienThoai, "Số điện thoại")) {
                 return false;
-            } if (maNgươiDung != null) {
+            }
+            if (maNgươiDung != null) {
                 DialogHelper.alert(null, "Tài khoản đã tồn tại!");
                 return false;
-            } if (email != null) {
+            }
+            if (email != null) {
                 DialogHelper.alert(null, "Email đã được sử dụng!");
                 return false;
-            } if (sdt != null) {
+            }
+            if (sdt != null) {
                 DialogHelper.alert(null, "Số điện thoại đã được sử dụng!");
                 return false;
-            } if (!txtSoDienThoai.getText().matches("^0\\d{9}$")) {
+            }
+            if (!txtSoDienThoai.getText().matches("^0\\d{9}$")) {
                 DialogHelper.alert(null, "Số điện thoại không đúng định dạng!");
                 return false;
-            } if (!txtEmail.getText().matches("\\w+@\\w+(\\.\\w+){1,2}")) {
+            }
+            if (!txtEmail.getText().matches("\\w+@\\w+(\\.\\w+){1,2}")) {
                 DialogHelper.alert(null, "Email không đúng định dạng!");
                 return false;
             }
@@ -167,8 +177,66 @@ public class NguoiDungImpl implements NguoiDungInterface{
     }
 
     @Override
-    public boolean update(JTextField txtTaiKhoan, JPasswordField txxmatKhau, JRadioButton rbNhanVien, JRadioButton rbNguoiDoc, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDienThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(JTable tbDSND, int index, JTextField txtTaiKhoan, JPasswordField txxmatKhau, JRadioButton rbNhanVien, JRadioButton rbNguoiDoc, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDienThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh) {
+        NguoiDung model = new NguoiDung();
+        model.setMaNguoiDung(txtTaiKhoan.getText());
+        model.setMatKhau(new String(txxmatKhau.getPassword()));
+        if (rbNhanVien.isSelected()) {
+            model.setVaiTro(true);
+        }
+        if (rbNguoiDoc.isSelected()) {
+            model.setVaiTro(false);
+        }
+        model.setHoTen(txtHoTen.getText());
+        Date ngaysinh = DateHelper.toDate(txtNgaySinh.getText());
+        java.sql.Date sqlStartDate = new java.sql.Date(ngaysinh.getTime());
+        model.setNgaySinh(sqlStartDate);
+        model.setSoDienThoai(txtSoDienThoai.getText());
+        model.setEmail(txtEmail.getText());
+        if (rbNam.isSelected()) {
+            model.setGioiTinh(true);
+        }
+        if (rbNu.isSelected()) {
+            model.setGioiTinh(false);
+        }
+        model.setDiaChi(txtDiaChi.getText());
+        model.setHinhAnh(lblHinhAnh.getToolTipText());
+        try {
+            NguoiDung email = dao.findByEmailUpdate(txtEmail.getText(), tbDSND.getValueAt(index, 7).toString());
+            NguoiDung sdt = dao.findBySdtUpdate(txtSoDienThoai.getText(), tbDSND.getValueAt(index, 8).toString());
+            if (!UHelper.checkNull(txxmatKhau, "Mật khẩu")) {
+                return false;
+            }
+            if (!UHelper.checkNull(txtHoTen, "Họ tên")) {
+                return false;
+            }
+            if (!UHelper.checkNull(txtEmail, "Email")) {
+                return false;
+            }
+            if (!UHelper.checkNull(txtSoDienThoai, "Số điện thoại")) {
+                return false;
+            }
+            if (email != null) {
+                DialogHelper.alert(null, "Email đã được sử dụng!");
+                return false;
+            }
+            if (sdt != null) {
+                DialogHelper.alert(null, "Số điện thoại đã được sử dụng!");
+                return false;
+            }
+            if (!txtSoDienThoai.getText().matches("^0\\d{9}$")) {
+                DialogHelper.alert(null, "Số điện thoại không đúng định dạng!");
+                return false;
+            }
+            if (!txtEmail.getText().matches("\\w+@\\w+(\\.\\w+){1,2}")) {
+                DialogHelper.alert(null, "Email không đúng định dạng!");
+                return false;
+            }
+            dao.update(model);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
@@ -179,7 +247,7 @@ public class NguoiDungImpl implements NguoiDungInterface{
                 if (dao.findById(txtTaiKhoan.getText()) != null) {
                     DialogHelper.alert(null, "Bạn không thể xóa tài khoản nhân viên");
                     return false;
-                } else{
+                } else {
                     dao.delete(maNd);
                     return true;
                 }
@@ -188,11 +256,6 @@ public class NguoiDungImpl implements NguoiDungInterface{
             }
         }
         return false;
-    }
-
-    @Override
-    public NguoiDung getModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -206,5 +269,43 @@ public class NguoiDungImpl implements NguoiDungInterface{
                 lblHinhAnh.setToolTipText(file.getName());
             }
         }
+    }
+
+    @Override
+    public boolean edit(JTable tbDSND, int index, JTextField txtTaiKhoan, JPasswordField txxMatKhau, JRadioButton rbNhanVien, JRadioButton rbNguoiDoc, JTextField txtHoVaTen, JTextField txtNgaySinh, JTextField txtSoDienThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh) {
+        try {
+            String mand = (String) tbDSND.getValueAt(index, 0);
+            NguoiDung model = dao.findById(mand);
+            if (model != null) {
+                txtTaiKhoan.setText(model.getMaNguoiDung());
+                txxMatKhau.setText(model.getMatKhau());
+                if (model.isVaiTro()) {
+                    rbNhanVien.setSelected(true);
+                }
+                if (!model.isVaiTro()) {
+                    rbNguoiDoc.setSelected(true);
+                }
+                txtHoVaTen.setText(model.getHoTen());
+                txtNgaySinh.setText(DateHelper.toString(model.getNgaySinh()));
+                txtSoDienThoai.setText(model.getSoDienThoai());
+                txtEmail.setText(model.getEmail());
+                if (model.isGioiTinh()) {
+                    rbNam.setSelected(true);
+                }
+                if (!model.isGioiTinh()) {
+                    rbNu.setSelected(true);
+                }
+                txtDiaChi.setText(model.getDiaChi());
+                if (model.getHinhAnh() != null) {
+                    lblHinhAnh.setIcon(ShareHelper.readLogo(model.getHinhAnh()));
+                } else {
+                    lblHinhAnh.setIcon(null);
+                }
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
     }
 }

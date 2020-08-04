@@ -75,6 +75,26 @@ public class NguoiDungDao {
         }
     }
     
+    public void update(NguoiDung model) {
+        String sql
+                = "Update NguoiDung Set MatKhau=?, VaiTro=?, HoTen=?, DiaChi=?, GioiTinh=?, NgaySinh=?, Email=?, SoDienThoai=?, HinhAnh=? Where MaNguoiDung=?";
+        try {
+            JdbcHelper.executeUpdate(sql,
+                    model.getMatKhau(),
+                    model.isVaiTro(),
+                    model.getHoTen(),
+                    model.getDiaChi(),
+                    model.isGioiTinh(),
+                    model.getNgaySinh(),
+                    model.getEmail(),
+                    model.getSoDienThoai(),
+                    model.getHinhAnh(),
+                    model.getMaNguoiDung());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
     public void delete(String maNguoiDung) {
         String sql = "Delete From NguoiDung WHERE MaNguoiDung = ?";
         try {
@@ -101,11 +121,24 @@ public class NguoiDungDao {
         return list.size() > 0 ? list.get(0) : null;
     }
     
+    public NguoiDung findByEmailUpdate(String email, String tb) {
+        String sql = "Select * from NguoiDung where Email = ? and not Email = ?";
+        List<NguoiDung> list = select(sql, email, tb);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+    
     public NguoiDung findBySDT(String sdt) {
         String sql = "SELECT * FROM NguoiDung WHERE soDienThoai = ?";
         List<NguoiDung> list = select(sql, sdt);
         return list.size() > 0 ? list.get(0) : null;
     }
+    
+    public NguoiDung findBySdtUpdate(String sdt, String tb) {
+        String sql = "Select * from NguoiDung where SoDienThoai = ? and not SoDienThoai = ?";
+        List<NguoiDung> list = select(sql, sdt, tb);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+    
     public List<NguoiDung> selectByKeyword(String key1, String key2, String key3, String key4, String key5, String key6) {
         String sql = "Select * FROM NguoiDung \n" +
 "where HoTen like ? or maNguoiDung like ? or DiaChi like ? or Email like ? or SoDienThoai like ? or ngaySinh like ?";

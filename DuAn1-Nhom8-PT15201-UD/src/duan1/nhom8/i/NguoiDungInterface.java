@@ -24,11 +24,11 @@ public interface NguoiDungInterface {
     
     boolean save(JTextField txtTaiKhoan, JPasswordField matKhau, JRadioButton rbNhanVien, JRadioButton rbNguoiDoc, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDIenThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);
     
-    boolean update(JTextField txtTaiKhoan, JPasswordField matKhau, JRadioButton rbNhanVien, JRadioButton rbNguoiDoc, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDIenThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);
+    boolean update(JTable tbDSND, int index, JTextField txtTaiKhoan, JPasswordField matKhau, JRadioButton rbNhanVien, JRadioButton rbNguoiDoc, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDIenThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);
     
     boolean delete(JTextField txtTaiKhoan);
     
-    NguoiDung getModel();
-    
     void selectImage(JLabel lblHinhAnh);
+    
+    boolean edit(JTable tbDSND, int index, JTextField txtTaiKhoan, JPasswordField txxMatKhau, JRadioButton rbNhanVien, JRadioButton rbNguoiDoc, JTextField txtHoVaTen, JTextField txtNgaySinh, JTextField txtSoDienThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);
 }
