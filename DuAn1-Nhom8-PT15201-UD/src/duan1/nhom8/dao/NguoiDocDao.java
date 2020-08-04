@@ -22,4 +22,13 @@ public class NguoiDocDao {
             System.out.println(e);
         }
     }
+    
+    public void deleteNguoiDung(String maNguoiDung) {
+        String sql = "Delete From NguoiDoc WHERE MaNguoiDung = ?";
+        try {
+            JdbcHelper.executeUpdate(sql, maNguoiDung);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

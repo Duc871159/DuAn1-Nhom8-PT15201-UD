@@ -79,7 +79,7 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
         txtTaiKhoan.setText("");
         txxMatKhau.setText("");
         txtEmail.setText("");
-        txtNgaySinh.setText("");
+        txtNgaySinh.setText(DateHelper.toString(new Date()));
         txtSoDienThoai.setText("");
         txtTimKiem.setText("");
         txtDiaChi.setText("");
@@ -142,7 +142,7 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Thông tin người dùng"));
 
-        lblHinhAnh.setText("Hình Ảnh");
+        lblHinhAnh.setText("Thêm Ảnh");
         lblHinhAnh.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         lblHinhAnh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

@@ -14,8 +14,6 @@ import duan1.nhom8.helper.UHelper;
 import duan1.nhom8.i.NguoiDungInterface;
 import duan1.nhom8.model.NguoiDoc;
 import duan1.nhom8.model.NguoiDung;
-import duan1.nhom8.ui.DangNhapJDialog;
-import duan1.nhom8.ui.NguoiDungJFrame;
 import java.awt.HeadlessException;
 import java.io.File;
 import java.util.Date;
@@ -244,10 +242,11 @@ public class NguoiDungImpl implements NguoiDungInterface {
         if (DialogHelper.confirm(null, "Bạn thực sự muốn xóa người học này?")) {
             String maNd = txtTaiKhoan.getText();
             try {
-                if (dao.findById(txtTaiKhoan.getText()) != null) {
+                if (dao.findByIdNV(txtTaiKhoan.getText()) != null) {
                     DialogHelper.alert(null, "Bạn không thể xóa tài khoản nhân viên");
                     return false;
                 } else {
+                    nguoiDocDao.deleteNguoiDung(maNd);
                     dao.delete(maNd);
                     return true;
                 }

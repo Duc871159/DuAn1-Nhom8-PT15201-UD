@@ -109,8 +109,19 @@ public class NguoiDungDao {
             return select(sql);
     }
     
+    public List<NguoiDung> selectNv(){
+        String sql = "SELECT * FROM NguoiDung Where VaiTro = 1";
+        return select(sql);
+    }
+    
     public NguoiDung findById(String maNguoiDung) {
         String sql = "SELECT * FROM NguoiDung WHERE maNguoiDung = ?";
+        List<NguoiDung> list = select(sql, maNguoiDung);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+    
+    public NguoiDung findByIdNV(String maNguoiDung) {
+        String sql = "SELECT * FROM NguoiDung WHERE maNguoiDung = ? and VaiTro = 1";
         List<NguoiDung> list = select(sql, maNguoiDung);
         return list.size() > 0 ? list.get(0) : null;
     }

@@ -23,6 +23,13 @@ public class NguoiDung {
     private String soDienThoai;
     private String hinhAnh;
 
+    @Override
+    public String toString() {
+        return maNguoiDung + " - " + hoTen;
+    }
+
+    
+    
     public String getHinhAnh() {
         return hinhAnh;
     }
@@ -116,11 +123,6 @@ public class NguoiDung {
 
     public void setSoDienThoai(String soDienThoai) {
         this.soDienThoai = soDienThoai;
-    }
-
-    @Override
-    public String toString() {
-        return "NguoiDung{" + "hoTen=" + hoTen + '}';
     }
     
 }
