@@ -6,7 +6,9 @@
 package duan1.nhom8.i;
 
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -16,4 +18,7 @@ import javax.swing.JTextField;
 public interface NhanVienInterface {
     void fillCombobox(JComboBox cbbNguoiDung);
     void selectCombobox(JComboBox cbbNguoiDung, JTextField txtHoTen, JTextField txtSDT, JTextField txtEmail, JRadioButton rdNam, JRadioButton rdNu);
+    void load(JTable tbDSNV, JTextField txtTimKiem);
+    boolean save(JTextField txtCaLamViec, JTextField txtLuong, JComboBox cbbNguoiDung);
+    
 }

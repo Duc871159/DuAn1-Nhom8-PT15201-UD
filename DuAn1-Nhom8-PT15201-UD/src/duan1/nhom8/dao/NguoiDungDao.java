@@ -110,7 +110,7 @@ public class NguoiDungDao {
     }
     
     public List<NguoiDung> selectNv(){
-        String sql = "SELECT * FROM NguoiDung Where VaiTro = 1";
+        String sql = "Select * from nguoiDung where VaiTro = 1 and maNguoiDung not in (Select maNguoiDung from nhanVien)";
         return select(sql);
     }
     
