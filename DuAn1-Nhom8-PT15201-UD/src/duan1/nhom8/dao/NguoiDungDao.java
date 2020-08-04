@@ -76,8 +76,7 @@ public class NguoiDungDao {
     }
     
     public void update(NguoiDung model) {
-        String sql
-                = "Update NguoiDung Set MatKhau=?, VaiTro=?, HoTen=?, DiaChi=?, GioiTinh=?, NgaySinh=?, Email=?, SoDienThoai=?, HinhAnh=? Where MaNguoiDung=?";
+        String sql = "Update NguoiDung Set MatKhau=?, VaiTro=?, HoTen=?, DiaChi=?, GioiTinh=?, NgaySinh=?, Email=?, SoDienThoai=?, HinhAnh=? Where MaNguoiDung=?";
         try {
             JdbcHelper.executeUpdate(sql,
                     model.getMatKhau(),

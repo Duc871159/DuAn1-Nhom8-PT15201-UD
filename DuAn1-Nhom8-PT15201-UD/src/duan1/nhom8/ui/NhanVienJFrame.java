@@ -21,12 +21,39 @@ public class NhanVienJFrame extends javax.swing.JFrame {
     public NhanVienJFrame() {
         initComponents();
         nv.fillCombobox(cbbTaiKhoan);
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         nv.load(tbDSNV, txtTimKiem);
+        this.clear();
     }
 
+    int index;
     NhanVienInterface nv = new NhanVienImpl();
+
+    void clear() {
+        txtMaNV.setText("");
+        txtLuong.setText("");
+        txtCaLamViec.setText("");
+        nv.fillCombobox(cbbTaiKhoan);
+        txtHoTen.setText("");
+        rbNam.setSelected(true);
+        txtSoDienThoai.setText("");
+        txtEmail.setText("");
+        txtTimKiem.setText("");
+        this.setStatus(true);
+    }
     
+    void setStatus(boolean insertable) {
+        btThem.setEnabled(insertable);
+        btSua.setEnabled(!insertable);
+        btXoa.setEnabled(!insertable);
+        boolean first = this.index > 0;
+        boolean last = this.index < tbDSNV.getRowCount() - 1;
+        btDau.setEnabled(!insertable && first);
+        btTruoc.setEnabled(!insertable && first);
+        btCuoi.setEnabled(!insertable && last);
+        btSau.setEnabled(!insertable && last);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,6 +194,11 @@ public class NhanVienJFrame extends javax.swing.JFrame {
         });
 
         btDau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/icons8-home-button-32.png"))); // NOI18N
+        btDau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDauActionPerformed(evt);
+            }
+        });
 
         btTruoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/icons8-go-back-30.png"))); // NOI18N
         btTruoc.addActionListener(new java.awt.event.ActionListener() {
@@ -176,8 +208,18 @@ public class NhanVienJFrame extends javax.swing.JFrame {
         });
 
         btSau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/icons8-forward-button-30.png"))); // NOI18N
+        btSau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSauActionPerformed(evt);
+            }
+        });
 
         btCuoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/icons8-end-button-32.png"))); // NOI18N
+        btCuoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCuoiActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Họ tên");
 
@@ -374,7 +416,7 @@ public class NhanVienJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 246, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -384,11 +426,14 @@ public class NhanVienJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btTruocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTruocActionPerformed
-        // TODO add your handling code here:
+        this.index--;
+        if (nv.edit(tbDSNV, index, cbbTaiKhoan, txtMaNV, txtLuong, txtCaLamViec, txtHoTen, txtSoDienThoai, txtEmail, rbNam, rbNu)) {
+            this.setStatus(false);
+        }
     }//GEN-LAST:event_btTruocActionPerformed
 
     private void btTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimKiemActionPerformed
-        // TODO add your handling code here:
+        nv.load(tbDSNV, txtTimKiem);
     }//GEN-LAST:event_btTimKiemActionPerformed
 
     private void txtMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNVActionPerformed
@@ -396,7 +441,7 @@ public class NhanVienJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMaNVActionPerformed
 
     private void btLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLamMoiActionPerformed
-        
+        this.clear();
     }//GEN-LAST:event_btLamMoiActionPerformed
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
@@ -407,11 +452,17 @@ public class NhanVienJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btThemActionPerformed
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
-        
+        if (nv.update(txtCaLamViec, txtLuong, cbbTaiKhoan, txtMaNV)) {
+            nv.load(tbDSNV, txtTimKiem);
+            DialogHelper.alert(this, "Sửa nhân viên thành công");
+        }
     }//GEN-LAST:event_btSuaActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
-        
+        if (nv.delete(txtMaNV)) {
+            nv.load(tbDSNV, txtTimKiem);
+            DialogHelper.alert(this, "Xóa thành công");
+        }
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void cbbTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTaiKhoanActionPerformed
@@ -419,8 +470,35 @@ public class NhanVienJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cbbTaiKhoanActionPerformed
 
     private void tbDSNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDSNVMouseClicked
-
+        if (evt.getClickCount() == 2) {
+            this.index = tbDSNV.rowAtPoint(evt.getPoint());
+            if (this.index >= 0) {
+                nv.edit(tbDSNV, index, cbbTaiKhoan, txtMaNV, txtLuong, txtCaLamViec, txtHoTen, txtSoDienThoai, txtEmail, rbNam, rbNu);
+                this.setStatus(false);
+            }
+        }
     }//GEN-LAST:event_tbDSNVMouseClicked
+
+    private void btDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDauActionPerformed
+        this.index = 0;
+        if (nv.edit(tbDSNV, index, cbbTaiKhoan, txtMaNV, txtLuong, txtCaLamViec, txtHoTen, txtSoDienThoai, txtEmail, rbNam, rbNu)) {
+            this.setStatus(false);
+        }
+    }//GEN-LAST:event_btDauActionPerformed
+
+    private void btSauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSauActionPerformed
+        this.index++;
+        if (nv.edit(tbDSNV, index, cbbTaiKhoan, txtMaNV, txtLuong, txtCaLamViec, txtHoTen, txtSoDienThoai, txtEmail, rbNam, rbNu)) {
+            this.setStatus(false);
+        }
+    }//GEN-LAST:event_btSauActionPerformed
+
+    private void btCuoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCuoiActionPerformed
+        this.index = tbDSNV.getRowCount() - 1;
+        if (nv.edit(tbDSNV, index, cbbTaiKhoan, txtMaNV, txtLuong, txtCaLamViec, txtHoTen, txtSoDienThoai, txtEmail, rbNam, rbNu)) {
+            this.setStatus(false);
+        }
+    }//GEN-LAST:event_btCuoiActionPerformed
 
     /**
      * @param args the command line arguments

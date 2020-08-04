@@ -49,7 +49,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jPanel3" max="32767" attributes="0"/>
-                  <Component id="jPanel4" pref="0" max="32767" attributes="0"/>
+                  <Component id="jPanel4" pref="246" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="18" max="32767" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
@@ -384,6 +384,9 @@
               <Image iconType="3" name="/duan1/nhom8/icon/icons8-home-button-32.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDauActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btTruoc">
           <Properties>
@@ -401,6 +404,9 @@
               <Image iconType="3" name="/duan1/nhom8/icon/icons8-forward-button-30.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSauActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btCuoi">
           <Properties>
@@ -408,6 +414,9 @@
               <Image iconType="3" name="/duan1/nhom8/icon/icons8-end-button-32.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCuoiActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>

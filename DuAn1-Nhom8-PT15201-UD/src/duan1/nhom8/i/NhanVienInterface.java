@@ -20,5 +20,7 @@ public interface NhanVienInterface {
     void selectCombobox(JComboBox cbbNguoiDung, JTextField txtHoTen, JTextField txtSDT, JTextField txtEmail, JRadioButton rdNam, JRadioButton rdNu);
     void load(JTable tbDSNV, JTextField txtTimKiem);
     boolean save(JTextField txtCaLamViec, JTextField txtLuong, JComboBox cbbNguoiDung);
-    
+    boolean update (JTextField txtCaLamViec, JTextField txtLuong, JComboBox cbbNguoiDung, JTextField txtMaNV);
+    boolean delete (JTextField txtMaNV);
+    boolean edit(JTable tbDSNV, int index, JComboBox cbbNguoiDung, JTextField txtMaNV, JTextField txtLuong, JTextField txtCaLamViec, JTextField txtHoTen, JTextField txtSDT, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu);
 }
