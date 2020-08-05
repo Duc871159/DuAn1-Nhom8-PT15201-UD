@@ -13,6 +13,15 @@ public class TrangThaiSach {
     private int maTrangThai;
     private int maSach;
     private int maPhieuMuon;
+    private boolean trangThai;
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
 
     public int getMaTrangThai() {
         return maTrangThai;

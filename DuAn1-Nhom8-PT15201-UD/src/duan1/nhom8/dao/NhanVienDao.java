@@ -141,4 +141,16 @@ public class NhanVienDao {
         List<NguoiDungNhanVien> list = select(sql, maNV);
         return list.size() > 0 ? list.get(0) : null;
     }
+    
+    public NhanVien findById(int maNhanVien) {
+        String sql = "SELECT * FROM NhanVien WHERE maNhanVien = ?";
+        List<NhanVien> list = selectNV(sql, maNhanVien);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+    
+    public NhanVien findByMaND(String maNguoiDung) {
+        String sql = "SELECT * FROM NhanVien WHERE maNguoiDung = ?";
+        List<NhanVien> list = selectNV(sql, maNguoiDung);
+        return list.size() > 0 ? list.get(0) : null;
+    }
 }

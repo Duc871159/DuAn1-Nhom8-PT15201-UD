@@ -15,7 +15,7 @@ import java.text.ParseException;
  */
 public class DateHelper {
 
-    static final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("MM/dd/yyyy");
+    static final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("MM-dd-yyyy");
 
     public static Date toDate(String date, String... pattern) {
         try {

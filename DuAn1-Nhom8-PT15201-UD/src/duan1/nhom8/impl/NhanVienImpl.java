@@ -154,7 +154,7 @@ public class NhanVienImpl implements NhanVienInterface {
 
     @Override
     public boolean delete(JTextField txtMaNV) {
-        if (DialogHelper.confirm(null, "Bạn thực sự muốn xóa người học này?")) {
+        if (DialogHelper.confirm(null, "Bạn thực sự muốn xóa nhân viên này?")) {
             int maNv = Integer.parseInt(txtMaNV.getText());
             try {
                 dao.delete(maNv);

@@ -239,7 +239,7 @@ public class NguoiDungImpl implements NguoiDungInterface {
 
     @Override
     public boolean delete(JTextField txtTaiKhoan) {
-        if (DialogHelper.confirm(null, "Bạn thực sự muốn xóa người học này?")) {
+        if (DialogHelper.confirm(null, "Bạn thực sự muốn xóa người dùng này?")) {
             String maNd = txtTaiKhoan.getText();
             try {
                 if (dao.findByIdNV(txtTaiKhoan.getText()) != null) {

@@ -67,7 +67,8 @@ Go
 Create table trangThaiSach(
 	maTrangThai		int not null identity(1, 1) primary key,
 	maSach			int not null foreign key(maSach) references Sach,
-	maPhieuMuon		int not null foreign key(maPhieuMuon) references PhieuMuon
+	maPhieuMuon		int not null foreign key(maPhieuMuon) references PhieuMuon,
+	trangThai		bit not null Default(0)
 )
 
 Select * from sach
@@ -90,4 +91,5 @@ Insert into nguoiDoc values('nguoidung1')
 
 Insert into phieuMuon values('07/28/2020', '08/04/2020', 1, 1, 0)
 
-Insert into trangThaiSach values(1, 1)
+Insert into trangThaiSach values(1, 1, 0)
+Insert into trangThaiSach values(2, 1, 0)
