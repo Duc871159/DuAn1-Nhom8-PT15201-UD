@@ -33,38 +33,6 @@ public class DangNhapJDialog extends javax.swing.JDialog {
     
     NguoiDungInterface nd = new NguoiDungImpl();
     
-//    NguoiDungDao dao = new NguoiDungDao();
-    
-//    void login(){
-//        if (!UHelper.checkNull(txtTenDN, "Tên đăng nhập")) {
-//            return;
-//        }
-//        if (!UHelper.checkNull(txxMk, "Mật khẩu")) {
-//            return;
-//        }
-//        String maNguoiDung = txtTenDN.getText();
-//        String matKhauInput = new String(txxMk.getPassword());
-//        try {
-//            NguoiDung nguoidung = dao.findById(maNguoiDung);
-//            if (nguoidung != null) {
-//                String matKhau = nguoidung.getMatKhau();
-//                if (matKhauInput.equals(matKhau)) {
-//                    ShareHelper.USER = nguoidung;
-//                    DialogHelper.alert(this, "Đăng nhập thành công");
-//                    System.out.println(nguoidung);
-//                    this.dispose();
-//                } else{
-//                    DialogHelper.alert(this, "Sai mật khẩu !");
-//                }
-//            } else{
-//                DialogHelper.alert(this, "Sai tên đăng nhâp !");
-//            }
-//        } catch (Exception e) {
-//            DialogHelper.alert(this, "Lỗi truy vấn Login: " + e);
-//        }
-//    }
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -172,6 +140,8 @@ public class DangNhapJDialog extends javax.swing.JDialog {
     private void btDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangNhapActionPerformed
         if (nd.login(txtTenDN, txxMk)) {
             this.dispose();
+            TrangChuJFrame tt = new TrangChuJFrame();
+            tt.setVisible(true);
         } else{
         }
     }//GEN-LAST:event_btDangNhapActionPerformed
