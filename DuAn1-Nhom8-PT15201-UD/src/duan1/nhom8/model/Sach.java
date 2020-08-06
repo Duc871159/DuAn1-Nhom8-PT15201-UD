@@ -16,7 +16,7 @@ public class Sach {
     private String tenSach;
     private String loaiSach;
     private String tacGia;
-    private Date ngayXuatBan;
+    private String NhaXuatBan;
     private int soLuong;
     private String viTri;
     private String hinhAnh;
@@ -69,12 +69,12 @@ public class Sach {
         this.tacGia = tacGia;
     }
 
-    public Date getNgayXuatBan() {
-        return ngayXuatBan;
+    public String getNhaXuatBan() {
+        return NhaXuatBan;
     }
 
-    public void setNgayXuatBan(Date ngayXuatBan) {
-        this.ngayXuatBan = ngayXuatBan;
+    public void setNhaXuatBan(String NhaXuatBan) {
+        this.NhaXuatBan = NhaXuatBan;
     }
 
     public int getSoLuong() {

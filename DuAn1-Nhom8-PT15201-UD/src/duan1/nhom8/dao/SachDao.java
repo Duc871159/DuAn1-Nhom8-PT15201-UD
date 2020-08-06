@@ -23,7 +23,7 @@ public class SachDao {
         model.setTenSach(rs.getString("TenSach"));
         model.setLoaiSach(rs.getString("LoaiSach"));
         model.setTacGia(rs.getString("tacGia"));
-        model.setNgayXuatBan(rs.getDate("NgaySuatBan"));
+        model.setNhaXuatBan(rs.getString("NhaXuatBan"));
         model.setSoLuong(rs.getInt("SoLuong"));
         model.setViTri(rs.getString("ViTri"));
         model.setHinhAnh(rs.getString("HinhAnh"));
@@ -57,5 +57,42 @@ public class SachDao {
         String sql = "Select * From Sach";
         return select(sql);
     }
+    public void insert(Sach model) {
+        String sql
+                = "INSERT INTO Sach (maSach,TenSach,LoaiSach,tacGia,NhaSuatBan,SoLuong,ViTri,HinhAnh) VALUES( ?,  ?,  ?,  ?,  ?,  ?,  ?,  ?)";
+        JdbcHelper.executeUpdate(sql,
+                model.getMaSach(),
+                model.getTenSach(),
+                model.getLoaiSach(),
+                model.getTacGia(),
+                model.getNhaXuatBan(),
+                model.getSoLuong(),
+                model.getViTri(),
+                model.getHinhAnh());
+    }
+    public void update(Sach model) {
+        String sql = "UPDATE Sach SET TenSach=?,LoaiSach=?,tacGia=?,NhaSuatBan=?,SoLuong=?,ViTri=?,HinhAnh=? HoTen=? WHERE maSach=?";
+        JdbcHelper.executeUpdate(sql,
+                model.getTenSach(),
+                model.getLoaiSach(),
+                model.getTacGia(),
+                model.getNhaXuatBan(),
+                model.getSoLuong(),
+                model.getViTri(),
+                model.getHinhAnh());
+    }
+    public void delete(String maSach) {
+        String sql = "DELETE FROM Sach WHERE maSach=?";
+        JdbcHelper.executeUpdate(sql, maSach);
+    }
+    public Sach findById(String maSach){
+        String sql = "SELECT * FROM Sach WHERE maSach=?";
+        List<Sach> list = select(sql,maSach);
+        return list.size()>0 ? list.get(0): null;
+    }
     
+    public List<Sach> selectByKeyword(String keyword) {
+        String sql = "SELECT * FROM Sach WHERE TenSach LIKE ?";
+        return select(sql, "%" + keyword + "%");
+    }
 }
