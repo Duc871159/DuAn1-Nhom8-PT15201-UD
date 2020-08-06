@@ -64,7 +64,7 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
     
     void openChiTiet(){
         Integer maPM = Integer.valueOf(txtMaPM.getText());
-        ChiTietPhieuMuon ctpm = new ChiTietPhieuMuon(maPM);
+        ChiTietPhieuMuonJFrame ctpm = new ChiTietPhieuMuonJFrame(maPM);
         ctpm.setVisible(true);
     }
 

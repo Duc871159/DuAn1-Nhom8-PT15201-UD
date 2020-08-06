@@ -63,4 +63,30 @@ public class SachDao {
         String sql = "Select * from sach where soLuong > 0 and maSach not in (Select maSach from trangThaiSach where maPhieuMuon = ?)";
         return select(sql, maPM);
     }
+    
+    public void updateMuon(Sach model) {
+        String sql = "Update Sach set SoLuong = SoLuong - 1 Where maSach = ?";
+        try {
+            JdbcHelper.executeUpdate(sql,
+                    model.getMaSach());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void updateTra(Sach model) {
+        String sql = "Update Sach set SoLuong = SoLuong + 1 Where maSach = ?";
+        try {
+            JdbcHelper.executeUpdate(sql,
+                    model.getMaSach());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public Sach findById(Integer maSach) {
+        String sql = "Select * From Sach Where maSach = ?";
+        List<Sach> list = select(sql, maSach);
+        return list.size() > 0 ? list.get(0) : null;
+    }
 }
