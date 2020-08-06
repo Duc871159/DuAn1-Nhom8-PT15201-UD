@@ -128,9 +128,16 @@ public class NhanVienJFrame extends javax.swing.JFrame {
                 "Mã nhân viên", "Ca làm việc", "Lương", "Tài khoản", "Họ tên", "Giới tính", "Số điện thoại", "Email"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -334,7 +341,7 @@ public class NhanVienJFrame extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức năng"));
         jPanel4.setPreferredSize(new java.awt.Dimension(170, 60));
 
-        btLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Stop.png"))); // NOI18N
+        btLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/icon-clear-28.jpg"))); // NOI18N
         btLamMoi.setText("Làm mới");
         btLamMoi.setPreferredSize(new java.awt.Dimension(110, 30));
         btLamMoi.addActionListener(new java.awt.event.ActionListener() {

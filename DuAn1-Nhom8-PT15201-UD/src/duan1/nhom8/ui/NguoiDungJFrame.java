@@ -416,7 +416,7 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức năng"));
         jPanel2.setPreferredSize(new java.awt.Dimension(170, 60));
 
-        btLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Stop.png"))); // NOI18N
+        btLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/icon-clear-28.jpg"))); // NOI18N
         btLamMoi.setText("Làm mới");
         btLamMoi.setPreferredSize(new java.awt.Dimension(110, 30));
         btLamMoi.addActionListener(new java.awt.event.ActionListener() {

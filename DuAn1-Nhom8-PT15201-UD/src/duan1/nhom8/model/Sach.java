@@ -16,7 +16,11 @@ public class Sach {
     private String tenSach;
     private String loaiSach;
     private String tacGia;
+<<<<<<< HEAD
     private String NhaXuatBan;
+=======
+    private String nhaXuatBan;
+>>>>>>> 11827aebe72672a392f69085cbb952db075d01e4
     private int soLuong;
     private String viTri;
     private String hinhAnh;
@@ -70,11 +74,19 @@ public class Sach {
     }
 
     public String getNhaXuatBan() {
+<<<<<<< HEAD
         return NhaXuatBan;
     }
 
     public void setNhaXuatBan(String NhaXuatBan) {
         this.NhaXuatBan = NhaXuatBan;
+=======
+        return nhaXuatBan;
+    }
+
+    public void setNhaXuatBan(String nhaXuatBan) {
+        this.nhaXuatBan = nhaXuatBan;
+>>>>>>> 11827aebe72672a392f69085cbb952db075d01e4
     }
 
     public int getSoLuong() {
@@ -83,5 +95,10 @@ public class Sach {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
+    }
+
+    @Override
+    public String toString() {
+        return tenSach;
     }
 }

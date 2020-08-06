@@ -127,7 +127,6 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
     public boolean update(JTextField txtMaPM, JTextField txtNgayTra, JRadioButton rbChuaTra, JRadioButton rbDaTra) {
         PhieuMuon model = new PhieuMuon();
         try {
-
             if (!UHelper.checkNull(txtNgayTra, "Ngày trả")) {
                 txtNgayTra.requestFocus();
                 return false;

@@ -53,7 +53,6 @@ public class NguoiDungImpl implements NguoiDungInterface {
                 if (matKhauInput.equals(matKhau)) {
                     ShareHelper.USER = nguoidung;
                     DialogHelper.alert(null, "Đăng nhập thành công");
-                    System.out.println(nguoidung);
                     return true;
                 } else {
                     DialogHelper.alert(null, "Sai mật khẩu !");
