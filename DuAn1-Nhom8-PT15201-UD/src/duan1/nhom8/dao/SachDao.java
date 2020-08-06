@@ -23,7 +23,7 @@ public class SachDao {
         model.setTenSach(rs.getString("TenSach"));
         model.setLoaiSach(rs.getString("LoaiSach"));
         model.setTacGia(rs.getString("tacGia"));
-        model.setNgayXuatBan(rs.getDate("NgaySuatBan"));
+        model.setNhaXuatBan(rs.getString("NhaXuatBan"));
         model.setSoLuong(rs.getInt("SoLuong"));
         model.setViTri(rs.getString("ViTri"));
         model.setHinhAnh(rs.getString("HinhAnh"));
@@ -58,4 +58,9 @@ public class SachDao {
         return select(sql);
     }
     
+    //Lấy danh sách sách trừ những sách đã có trong phiếu mượn
+    public List<Sach> selectByTrangThaiSach(Integer maPM) {
+        String sql = "Select * from sach where soLuong > 0 and maSach not in (Select maSach from trangThaiSach where maPhieuMuon = ?)";
+        return select(sql, maPM);
+    }
 }

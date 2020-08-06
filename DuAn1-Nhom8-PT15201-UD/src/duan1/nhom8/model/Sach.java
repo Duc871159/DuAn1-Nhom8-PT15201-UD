@@ -16,7 +16,7 @@ public class Sach {
     private String tenSach;
     private String loaiSach;
     private String tacGia;
-    private Date ngayXuatBan;
+    private String nhaXuatBan;
     private int soLuong;
     private String viTri;
     private String hinhAnh;
@@ -69,12 +69,12 @@ public class Sach {
         this.tacGia = tacGia;
     }
 
-    public Date getNgayXuatBan() {
-        return ngayXuatBan;
+    public String getNhaXuatBan() {
+        return nhaXuatBan;
     }
 
-    public void setNgayXuatBan(Date ngayXuatBan) {
-        this.ngayXuatBan = ngayXuatBan;
+    public void setNhaXuatBan(String nhaXuatBan) {
+        this.nhaXuatBan = nhaXuatBan;
     }
 
     public int getSoLuong() {
@@ -83,5 +83,10 @@ public class Sach {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
+    }
+
+    @Override
+    public String toString() {
+        return tenSach;
     }
 }

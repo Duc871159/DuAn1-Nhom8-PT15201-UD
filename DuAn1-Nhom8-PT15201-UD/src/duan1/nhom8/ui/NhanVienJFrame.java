@@ -128,9 +128,16 @@ public class NhanVienJFrame extends javax.swing.JFrame {
                 "Mã nhân viên", "Ca làm việc", "Lương", "Tài khoản", "Họ tên", "Giới tính", "Số điện thoại", "Email"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];

@@ -61,6 +61,12 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
         rbDaTra.setVisible(!insertable);
         lbTrangThai.setVisible(!insertable);
     }
+    
+    void openChiTiet(){
+        Integer maPM = Integer.valueOf(txtMaPM.getText());
+        ChiTietPhieuMuon ctpm = new ChiTietPhieuMuon(maPM);
+        ctpm.setVisible(true);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -233,6 +239,11 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
         });
 
         btChiTiet.setText("Chi tiết");
+        btChiTiet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btChiTietActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Người tạo");
 
@@ -402,7 +413,7 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(24, 24, 24))
@@ -504,6 +515,10 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tbDSPMMouseClicked
+
+    private void btChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChiTietActionPerformed
+        this.openChiTiet();
+    }//GEN-LAST:event_btChiTietActionPerformed
 
     /**
      * @param args the command line arguments
