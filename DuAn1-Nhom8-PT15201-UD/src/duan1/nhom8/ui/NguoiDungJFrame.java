@@ -538,8 +538,6 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
         if (nd.save(txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
             nd.load(tbDSNguoiDung, txtTimKiem);
             DialogHelper.alert(this, "Thêm tài khoản thành công");
-        } else{
-
         }
     }//GEN-LAST:event_btThemActionPerformed
 

@@ -5,6 +5,10 @@
  */
 package duan1.nhom8.ui;
 
+import duan1.nhom8.helper.DialogHelper;
+import duan1.nhom8.i.SachInterface;
+import duan1.nhom8.impl.SachImpl;
+
 /**
  *
  * @author Admin
@@ -16,8 +20,37 @@ public class SachJFrame extends javax.swing.JFrame {
      */
     public SachJFrame() {
         initComponents();
+        s.load(tbSach, txtTimKiem);
+        this.clear();
+        this.setLocationRelativeTo(null);
     }
 
+    int index;
+    SachInterface s = new SachImpl();
+ 
+    void setStatus(boolean insertable) {
+        btThem.setEnabled(insertable);
+        btSua.setEnabled(!insertable);
+        btXoa.setEnabled(!insertable);
+        boolean first = this.index > 0;
+        boolean last = this.index < tbSach.getRowCount() - 1;
+        btDau.setEnabled(!insertable && first);
+        btTruoc.setEnabled(!insertable && first);
+        btCuoi.setEnabled(!insertable && last);
+        btSau.setEnabled(!insertable && last);
+    }
+    
+    void clear(){
+        txtMaSach.setText("");
+        txtTenSach.setText("");
+        txtLoaiSach.setText("");
+        txtNhaXuatBan.setText("");
+        txtTacGia.setText("");
+        txtSoLuong.setText("");
+        txtTimKiem.setText("");
+        txtViTri.setText("");
+        this.setStatus(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,6 +60,7 @@ public class SachJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtMaSach = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbSach = new javax.swing.JTable();
@@ -37,7 +71,7 @@ public class SachJFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtSoLuong = new javax.swing.JTextField();
-        txtNamSB = new javax.swing.JTextField();
+        txtNhaXuatBan = new javax.swing.JTextField();
         txtTacGia = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -56,38 +90,56 @@ public class SachJFrame extends javax.swing.JFrame {
         btSua = new javax.swing.JButton();
         btXoa = new javax.swing.JButton();
 
+        txtMaSach.setText("jTextField1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách Sách"));
 
         tbSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Sách", "Tên Sách", "Thể loại", "Vị trí", "Tác Giả", "Nhà Xuất Bản", "Số Lượng", "Trạng Thái"
+                "Mã Sách", "Tên Sách", "Thể loại", "Vị trí", "Tác Giả", "Nhà Xuất Bản", "Hình ảnh", "Số Lượng", "Có trong thư viện"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbSachMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbSach);
         if (tbSach.getColumnModel().getColumnCount() > 0) {
             tbSach.getColumnModel().getColumn(0).setMinWidth(0);
             tbSach.getColumnModel().getColumn(0).setMaxWidth(0);
-            tbSach.getColumnModel().getColumn(6).setMinWidth(0);
-            tbSach.getColumnModel().getColumn(6).setMaxWidth(0);
         }
+
+        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKiemActionPerformed(evt);
+            }
+        });
 
         btTimKiem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/icons8-search-50.png"))); // NOI18N
@@ -135,7 +187,7 @@ public class SachJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Tên Sách");
 
-        jLabel4.setText("Loại Sách");
+        jLabel4.setText("Thể loại");
 
         lblHinhAnh.setText("Thêm Ảnh");
         lblHinhAnh.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -204,7 +256,7 @@ public class SachJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNamSB, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -239,7 +291,7 @@ public class SachJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(txtLoaiSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
-                            .addComponent(txtNamSB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -352,64 +404,77 @@ public class SachJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btTimKiemActionPerformed
 
     private void lblHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhAnhMouseClicked
-//        nd.selectImage(lblHinhAnh);
+        s.selectImage(lblHinhAnh);
     }//GEN-LAST:event_lblHinhAnhMouseClicked
 
     private void btDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDauActionPerformed
-//        this.index = 0;
-//        if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
-//            this.setStatus(false);
-//        }
+        this.index = 0;
+        if (s.edit(tbSach, index, txtMaSach, txtTenSach, txtLoaiSach, txtViTri, txtTacGia, txtNhaXuatBan, txtSoLuong, lblHinhAnh)) {
+            this.setStatus(false);
+        }
     }//GEN-LAST:event_btDauActionPerformed
 
     private void btTruocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTruocActionPerformed
-//        this.index--;
-//        if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
-//            this.setStatus(false);
-//        }
+        this.index--;
+        if (s.edit(tbSach, index, txtMaSach, txtTenSach, txtLoaiSach, txtViTri, txtTacGia, txtNhaXuatBan, txtSoLuong, lblHinhAnh)) {
+            this.setStatus(false);
+        }
     }//GEN-LAST:event_btTruocActionPerformed
 
     private void btSauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSauActionPerformed
-//        this.index++;
-//        if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
-//            this.setStatus(false);
-//        }
+        this.index++;
+        if (s.edit(tbSach, index, txtMaSach, txtTenSach, txtLoaiSach, txtViTri, txtTacGia, txtNhaXuatBan, txtSoLuong, lblHinhAnh)) {
+            this.setStatus(false);
+        }
     }//GEN-LAST:event_btSauActionPerformed
 
     private void btCuoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCuoiActionPerformed
-//        this.index = tbDSNguoiDung.getRowCount() - 1;
-//        if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
-//            this.setStatus(false);
-//        }
+        this.index = tbSach.getRowCount() - 1;
+        if (s.edit(tbSach, index, txtMaSach, txtTenSach, txtLoaiSach, txtViTri, txtTacGia, txtNhaXuatBan, txtSoLuong, lblHinhAnh)) {
+            this.setStatus(false);
+        }
     }//GEN-LAST:event_btCuoiActionPerformed
 
     private void btLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLamMoiActionPerformed
-//        this.clear();
+        this.clear();
     }//GEN-LAST:event_btLamMoiActionPerformed
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
-//        if (nd.save(txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
-//            nd.load(tbDSNguoiDung, txtTimKiem);
-//            DialogHelper.alert(this, "Thêm tài khoản thành công");
-//        } else{
-//
-//        }
+        if (s.save(txtTenSach, txtLoaiSach, txtViTri, txtTacGia, txtNhaXuatBan, txtSoLuong, lblHinhAnh)) {
+            s.load(tbSach, txtTimKiem);
+            DialogHelper.alert(this, "Thêm sách thành công");
+        }
     }//GEN-LAST:event_btThemActionPerformed
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
-//        if (nd.update(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
-//            nd.load(tbDSNguoiDung, txtTimKiem);
-//            DialogHelper.alert(this, "Sửa tài khoản thành công");
-//        }
+        if (s.update(txtMaSach, txtTenSach, txtLoaiSach, txtViTri, txtTacGia, txtNhaXuatBan, txtSoLuong, lblHinhAnh)) {
+            s.load(tbSach, txtTimKiem);
+            DialogHelper.alert(this, "Sửa thành công");
+        }
     }//GEN-LAST:event_btSuaActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
-//        if (nd.delete(txtTaiKhoan)) {
-//            nd.load(tbDSNguoiDung, txtTimKiem);
-//            DialogHelper.alert(this, "Xóa thành công");
-//        } else{
-//        }
+        if (s.delete(txtMaSach)) {
+            s.load(tbSach, txtTimKiem);
+            DialogHelper.alert(this, "Xóa thành công");
+        } else{
+        }
     }//GEN-LAST:event_btXoaActionPerformed
+
+    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
+        s.load(tbSach, txtTimKiem);
+    }//GEN-LAST:event_txtTimKiemActionPerformed
+
+    private void tbSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSachMouseClicked
+        if (evt.getClickCount() == 2) {
+            this.index = tbSach.rowAtPoint(evt.getPoint());
+            if (this.index >= 0) {
+                if (s.edit(tbSach, index, txtMaSach, txtTenSach, txtLoaiSach, txtViTri, txtTacGia, txtNhaXuatBan, txtSoLuong, lblHinhAnh)) {
+                    this.setStatus(false);
+                }
+            }
+        }
+    }//GEN-LAST:event_tbSachMouseClicked
 
     /**
      * @param args the command line arguments
@@ -469,7 +534,8 @@ public class SachJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblHinhAnh;
     private javax.swing.JTable tbSach;
     private javax.swing.JTextField txtLoaiSach;
-    private javax.swing.JTextField txtNamSB;
+    private javax.swing.JTextField txtMaSach;
+    private javax.swing.JTextField txtNhaXuatBan;
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTacGia;
     private javax.swing.JTextField txtTenSach;

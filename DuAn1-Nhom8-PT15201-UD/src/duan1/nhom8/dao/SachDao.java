@@ -94,4 +94,46 @@ public class SachDao {
         String sql = "Select * from Sach where TenSach like ? or LoaiSach like ? or TacGia like ? or NhaXuatBan like ? or ViTri like ?";
         return select(sql, "%" + key1 + "%", "%" + key2 + "%", "%" + key3 + "%", "%" + key4 + "%", "%" + key5 + "%");
     }
+    
+    public void save(Sach model) {
+        String sql = "Insert into Sach (TenSach, LoaiSach, ViTri, TacGia, NhaXuatBan, SoLuong, HinhAnh) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try {
+            JdbcHelper.executeUpdate(sql,
+                    model.getTenSach(),
+                    model.getLoaiSach(),
+                    model.getViTri(),
+                    model.getTacGia(),
+                    model.getNhaXuatBan(), 
+                    model.getSoLuong(),
+                    model.getHinhAnh());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void delete(Integer maSach) {
+        String sql = "Delete From Sach WHERE MaSach = ?";
+        try {
+            JdbcHelper.executeUpdate(sql, maSach);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void update(Sach model) {
+        String sql = "Update Sach Set TenSach=?, LoaiSach=?, ViTri=?, TacGia=?, NhaXuatBan=?, SoLuong=?, HinhAnh=? Where MaSach=?";
+        try {
+            JdbcHelper.executeUpdate(sql,
+                    model.getTenSach(),
+                    model.getLoaiSach(),
+                    model.getViTri(),
+                    model.getTacGia(),
+                    model.getNhaXuatBan(),
+                    model.getSoLuong(),
+                    model.getHinhAnh(),
+                    model.getMaSach());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

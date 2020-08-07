@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JTextField" name="txtMaSach">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -105,15 +112,16 @@
             <Component class="javax.swing.JTable" name="tbSach">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="8" rowCount="6">
+                  <Table columnCount="9" rowCount="6">
                     <Column editable="false" title="M&#xe3; S&#xe1;ch" type="java.lang.Object"/>
                     <Column editable="false" title="T&#xea;n S&#xe1;ch" type="java.lang.Object"/>
                     <Column editable="false" title="Th&#x1ec3; lo&#x1ea1;i" type="java.lang.Object"/>
                     <Column editable="false" title="V&#x1ecb; tr&#xed;" type="java.lang.Object"/>
                     <Column editable="false" title="T&#xe1;c Gi&#x1ea3;" type="java.lang.Object"/>
                     <Column editable="false" title="Nh&#xe0; Xu&#x1ea5;t B&#x1ea3;n" type="java.lang.Object"/>
+                    <Column editable="false" title="H&#xec;nh &#x1ea3;nh" type="java.lang.Object"/>
                     <Column editable="false" title="S&#x1ed1; L&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
-                    <Column editable="false" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object"/>
+                    <Column editable="false" title="C&#xf3; trong th&#x1b0; vi&#x1ec7;n" type="java.lang.Boolean"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -148,7 +156,12 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="0" minWidth="0" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -164,10 +177,16 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbSachMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JTextField" name="txtTimKiem">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTimKiemActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btTimKiem">
           <Properties>
@@ -232,7 +251,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="txtSoLuong" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="txtNamSB" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="txtNhaXuatBan" min="-2" pref="200" max="-2" attributes="0"/>
                       <Component id="txtTacGia" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -275,7 +294,7 @@
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtLoaiSach" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNamSB" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNhaXuatBan" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -316,7 +335,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtSoLuong">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNamSB">
+        <Component class="javax.swing.JTextField" name="txtNhaXuatBan">
         </Component>
         <Component class="javax.swing.JTextField" name="txtTacGia">
         </Component>
@@ -327,7 +346,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i S&#xe1;ch"/>
+            <Property name="text" type="java.lang.String" value="Th&#x1ec3; lo&#x1ea1;i"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTenSach">
