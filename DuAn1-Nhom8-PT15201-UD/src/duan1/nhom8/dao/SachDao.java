@@ -89,4 +89,9 @@ public class SachDao {
         List<Sach> list = select(sql, maSach);
         return list.size() > 0 ? list.get(0) : null;
     }
+    
+    public List<Sach> selectByKeyword(String key1, String key2, String key3, String key4, String key5) {
+        String sql = "Select * from Sach where TenSach like ? or LoaiSach like ? or TacGia like ? or NhaXuatBan like ? or ViTri like ?";
+        return select(sql, "%" + key1 + "%", "%" + key2 + "%", "%" + key3 + "%", "%" + key4 + "%", "%" + key5 + "%");
+    }
 }

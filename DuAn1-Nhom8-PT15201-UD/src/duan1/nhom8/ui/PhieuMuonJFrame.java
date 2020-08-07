@@ -42,7 +42,7 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
         txtNgayMuon.setText(DateHelper.toString(new Date()));
         txtNgayTra.setText(DateHelper.toString(DateHelper.add(14)));
         txtNguoiMuon.setText("");
-      txtNguoiTao.setText(ShareHelper.USER.getMaNguoiDung());
+        txtNguoiTao.setText(ShareHelper.USER.getMaNguoiDung());
         this.setStatus(true);
     }
 

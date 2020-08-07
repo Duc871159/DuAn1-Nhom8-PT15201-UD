@@ -7,6 +7,8 @@ package duan1.nhom8.ui;
 
 import duan1.nhom8.helper.DialogHelper;
 import duan1.nhom8.helper.ShareHelper;
+import duan1.nhom8.i.SachInterface;
+import duan1.nhom8.impl.SachImpl;
 
 /**
  *
@@ -22,19 +24,31 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         if (!ShareHelper.authenticated()) {
             jToolBar1.setVisible(false);
+            jMenu4.setVisible(false);
+            jMenu2.setVisible(false);
+            mnDangXuat.setVisible(false);
         }
         if (ShareHelper.authenticated()) {
             if (ShareHelper.USER.isVaiTro() == true) {
                 btnPhieuMuonCuaToi.setVisible(false);
                 jToolBar1.setVisible(true);
+                mnDangNhap.setVisible(false);
+                jMenu4.setVisible(true);
+                jMenu2.setVisible(true);
             }
             if (ShareHelper.USER.isVaiTro() == false) {
                 btnPhieuMuon.setVisible(false);
                 btnSach.setVisible(false);
                 jToolBar1.setVisible(true);
+                mnDangNhap.setVisible(false);
+                jMenu4.setVisible(false);
+                jMenu2.setVisible(false);
             }
         }
+        s.loadTrangChu(tbSach, txtTimKiem);
     }
+
+    SachInterface s = new SachImpl();
 
     void login() {
         new DangNhapJDialog(this, true).setVisible(true);
@@ -70,9 +84,13 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         btnPhieuMuonCuaToi = new javax.swing.JButton();
         btnPhieuMuon = new javax.swing.JButton();
         btnSach = new javax.swing.JButton();
+        txtTimKiem = new javax.swing.JTextField();
+        btTimKiem = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbSach = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        mnDangNhap = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mnHeThong = new javax.swing.JMenu();
+        mnDangNhap = new javax.swing.JMenuItem();
         mnDangXuat = new javax.swing.JMenuItem();
         mnDoiMatKhau = new javax.swing.JMenuItem();
         mnKetThuc = new javax.swing.JMenuItem();
@@ -88,7 +106,6 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1200, 800));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 204));
@@ -97,13 +114,20 @@ public class TrangChuJFrame extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
+        btnDangXuat.setForeground(new java.awt.Color(255, 255, 255));
         btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Log out.png"))); // NOI18N
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.setFocusable(false);
         btnDangXuat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDangXuat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnDangXuat);
 
+        btnPhieuMuonCuaToi.setForeground(new java.awt.Color(255, 255, 255));
         btnPhieuMuonCuaToi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Lists.png"))); // NOI18N
         btnPhieuMuonCuaToi.setText("Phiếu mượn của tôi");
         btnPhieuMuonCuaToi.setFocusable(false);
@@ -111,6 +135,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         btnPhieuMuonCuaToi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnPhieuMuonCuaToi);
 
+        btnPhieuMuon.setForeground(new java.awt.Color(255, 255, 255));
         btnPhieuMuon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Certificate.png"))); // NOI18N
         btnPhieuMuon.setText("Phiếu mượn");
         btnPhieuMuon.setFocusable(false);
@@ -123,13 +148,57 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         });
         jToolBar1.add(btnPhieuMuon);
 
+        btnSach.setForeground(new java.awt.Color(255, 255, 255));
+        btnSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/87-876167_icon-book-note-dairy-book-book-book-book-b-biểu-tượng-cuốn.png"))); // NOI18N
         btnSach.setText("Sách");
         btnSach.setFocusable(false);
         btnSach.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSach.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSachActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnSach);
 
+        btTimKiem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/icons8-search-50.png"))); // NOI18N
+        btTimKiem.setText("Tìm");
+        btTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTimKiemActionPerformed(evt);
+            }
+        });
+
+        tbSach.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã Sách", "Tên sách", "Thể loại", "Tác giả", "Nhà xuất bản", "Vị trí", "Trạng thái"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbSach);
+        if (tbSach.getColumnModel().getColumnCount() > 0) {
+            tbSach.getColumnModel().getColumn(0).setMinWidth(0);
+            tbSach.getColumnModel().getColumn(0).setMaxWidth(0);
+        }
+
         jDesktopPane1.setLayer(jToolBar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(txtTimKiem, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(btTimKiem, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -137,45 +206,64 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1190, Short.MAX_VALUE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(423, 423, 423)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(btTimKiem)
+                .addContainerGap(480, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(731, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        mnDangNhap.setText("Hệ Thống");
+        mnHeThong.setText("Hệ Thống");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Home.png"))); // NOI18N
-        jMenuItem1.setText("Đăng nhập");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        mnDangNhap.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
+        mnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Home.png"))); // NOI18N
+        mnDangNhap.setText("Đăng nhập");
+        mnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                mnDangNhapActionPerformed(evt);
             }
         });
-        mnDangNhap.add(jMenuItem1);
+        mnHeThong.add(mnDangNhap);
 
         mnDangXuat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         mnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Log out.png"))); // NOI18N
         mnDangXuat.setText("Đăng Xuất");
-        mnDangNhap.add(mnDangXuat);
+        mnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnDangXuatActionPerformed(evt);
+            }
+        });
+        mnHeThong.add(mnDangXuat);
 
         mnDoiMatKhau.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         mnDoiMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Refresh.png"))); // NOI18N
         mnDoiMatKhau.setText("Đổi Mật Khẩu");
-        mnDangNhap.add(mnDoiMatKhau);
+        mnHeThong.add(mnDoiMatKhau);
 
         mnKetThuc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         mnKetThuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Stop_1.png"))); // NOI18N
         mnKetThuc.setText("Kết Thúc");
-        mnDangNhap.add(mnKetThuc);
+        mnHeThong.add(mnKetThuc);
 
-        jMenuBar1.add(mnDangNhap);
+        jMenuBar1.add(mnHeThong);
 
         jMenu2.setText("Quản Lý");
 
@@ -230,8 +318,8 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jDesktopPane1)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,10 +333,10 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void mnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnDangNhapActionPerformed
         this.login();
         this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_mnDangNhapActionPerformed
 
     private void mnPhieuMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPhieuMuonActionPerformed
         this.openPhieuMuon();
@@ -261,6 +349,26 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     private void btnPhieuMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhieuMuonActionPerformed
         this.openPhieuMuon();
     }//GEN-LAST:event_btnPhieuMuonActionPerformed
+
+    private void btTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimKiemActionPerformed
+        s.loadTrangChu(tbSach, txtTimKiem);
+    }//GEN-LAST:event_btTimKiemActionPerformed
+
+    private void btnSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSachActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSachActionPerformed
+
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        this.logoff();       
+        this.dispose();
+        new TrangChuJFrame().setVisible(true);
+    }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    private void mnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnDangXuatActionPerformed
+        this.logoff();
+        this.dispose();
+        new TrangChuJFrame().setVisible(true);
+    }//GEN-LAST:event_mnDangXuatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,6 +406,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btTimKiem;
     private javax.swing.JButton btnDangXuat;
     private javax.swing.JButton btnPhieuMuon;
     private javax.swing.JButton btnPhieuMuonCuaToi;
@@ -308,18 +417,21 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JMenu mnDangNhap;
+    private javax.swing.JMenuItem mnDangNhap;
     private javax.swing.JMenuItem mnDangXuat;
     private javax.swing.JMenuItem mnDoiMatKhau;
+    private javax.swing.JMenu mnHeThong;
     private javax.swing.JMenuItem mnKetThuc;
     private javax.swing.JMenuItem mnNhanVien;
     private javax.swing.JMenuItem mnPhieuMuon;
     private javax.swing.JMenuItem mnSach;
     private javax.swing.JMenuItem mtTaiKhoan;
+    private javax.swing.JTable tbSach;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
