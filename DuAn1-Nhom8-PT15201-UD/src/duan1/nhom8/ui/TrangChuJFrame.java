@@ -116,6 +116,11 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         btnPhieuMuon.setFocusable(false);
         btnPhieuMuon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPhieuMuon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPhieuMuon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhieuMuonActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnPhieuMuon);
 
         btnSach.setText("Sách");
@@ -252,6 +257,10 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     private void mnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNhanVienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mnNhanVienActionPerformed
+
+    private void btnPhieuMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhieuMuonActionPerformed
+        this.openPhieuMuon();
+    }//GEN-LAST:event_btnPhieuMuonActionPerformed
 
     /**
      * @param args the command line arguments

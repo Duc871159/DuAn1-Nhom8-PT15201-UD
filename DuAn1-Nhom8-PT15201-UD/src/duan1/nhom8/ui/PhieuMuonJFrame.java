@@ -26,6 +26,7 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
         pm.load(tbDSPM, txtTimKiem);
         this.setLocationRelativeTo(null);
         this.clear();
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
     int index;
@@ -41,7 +42,7 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
         txtNgayMuon.setText(DateHelper.toString(new Date()));
         txtNgayTra.setText(DateHelper.toString(DateHelper.add(14)));
         txtNguoiMuon.setText("");
-//      txtNguoiTao.setText(ShareHelper.USER.getMaNguoiDung());
+      txtNguoiTao.setText(ShareHelper.USER.getMaNguoiDung());
         this.setStatus(true);
     }
 
@@ -187,6 +188,8 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
         jLabel15.setText("Ngày Trả");
 
         txtMaPM.setEditable(false);
+
+        txtNguoiTao.setEditable(false);
 
         txtNgayMuon.setEditable(false);
         txtNgayMuon.addActionListener(new java.awt.event.ActionListener() {
