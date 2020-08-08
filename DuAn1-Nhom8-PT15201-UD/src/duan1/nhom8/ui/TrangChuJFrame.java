@@ -5,10 +5,12 @@
  */
 package duan1.nhom8.ui;
 
+import duan1.nhom8.dao.NguoiDocDao;
 import duan1.nhom8.helper.DialogHelper;
 import duan1.nhom8.helper.ShareHelper;
 import duan1.nhom8.i.SachInterface;
 import duan1.nhom8.impl.SachImpl;
+import duan1.nhom8.model.NguoiDoc;
 
 /**
  *
@@ -49,6 +51,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     }
 
     SachInterface s = new SachImpl();
+    NguoiDocDao ndDao = new NguoiDocDao();
 
     void login() {
         new DangNhapJDialog(this, true).setVisible(true);
@@ -63,6 +66,16 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         if (ShareHelper.authenticated()) {
             PhieuMuonJFrame pm = new PhieuMuonJFrame();
             pm.setVisible(true);
+        } else {
+            DialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+    
+    void openPhieuMuonCuaToi() {
+        if (ShareHelper.authenticated()) {
+            NguoiDoc nd = ndDao.findByMaND(ShareHelper.USER.getMaNguoiDung());
+            PhieuMuonCuaToiJFrame pmct = new PhieuMuonCuaToiJFrame(nd.getMaNguoiDoc());
+            pmct.setVisible(true);
         } else {
             DialogHelper.alert(this, "Vui lòng đăng nhập!");
         }
@@ -133,6 +146,11 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         btnPhieuMuonCuaToi.setFocusable(false);
         btnPhieuMuonCuaToi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPhieuMuonCuaToi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPhieuMuonCuaToi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhieuMuonCuaToiActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnPhieuMuonCuaToi);
 
         btnPhieuMuon.setForeground(new java.awt.Color(255, 255, 255));
@@ -369,6 +387,10 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         this.dispose();
         new TrangChuJFrame().setVisible(true);
     }//GEN-LAST:event_mnDangXuatActionPerformed
+
+    private void btnPhieuMuonCuaToiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhieuMuonCuaToiActionPerformed
+        this.openPhieuMuonCuaToi();
+    }//GEN-LAST:event_btnPhieuMuonCuaToiActionPerformed
 
     /**
      * @param args the command line arguments
