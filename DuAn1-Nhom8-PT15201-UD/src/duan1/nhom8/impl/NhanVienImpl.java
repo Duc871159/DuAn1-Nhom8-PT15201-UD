@@ -69,10 +69,11 @@ public class NhanVienImpl implements NhanVienInterface {
             List<NguoiDungNhanVien> list = dao.selectByKeyword(keyword, keyword, keyword, keyword, keyword, keyword, keyword);
 //            List<NguoiDungNhanVien> list = dao.select();            
             for (NguoiDungNhanVien ndnv : list) {
+                int lung = (int) ndnv.getLuong();
                 Object[] row = {
                     ndnv.getMaNhanVien(),
                     ndnv.getCaLamViec(),
-                    ndnv.getLuong(),
+                    lung,
                     ndnv.getMaNguoiDung(),
                     ndnv.getHoTen(),
                     ndnv.isGioiTinh() ? "Nam" : "Nữ",
@@ -115,7 +116,8 @@ public class NhanVienImpl implements NhanVienInterface {
             cbbNguoiDung.getModel().setSelectedItem(nguoiDungDao.findById(model.getMaNguoiDung()));
             txtMaNV.setText(String.valueOf(model.getMaNhanVien()));
             txtCaLamViec.setText(String.valueOf(model.getCaLamViec()));
-            txtLuong.setText(String.valueOf(model.getLuong()));
+            int lung = (int) model.getLuong();
+            txtLuong.setText(String.valueOf(lung));
             txtHoTen.setText(model.getHoTen());
             txtEmail.setText(model.getEmail());
             txtSDT.setText(model.getSoDienThoai());

@@ -69,39 +69,39 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
                     ngay > 0 && !pm.isTrangThai() ? ngay * 10000 : 0
                 };
                 model.addRow(row);
-                try {
-                    if (ngay < 5 && !pm.isTrangThai()) {
-                        Properties mailServerProperties;
-                        Session getMailSession;
-                        MimeMessage mailMessage;
-
-                        //Setup Mail server
-                        mailServerProperties = System.getProperties();
-                        mailServerProperties.put("mail.smtp.port", "587");
-                        mailServerProperties.put("mail.smtp.auth", "true");
-                        mailServerProperties.put("mail.smtp.starttls.enable", "true");
-                        //Get Mail Session
-                        getMailSession = Session.getDefaultInstance(mailServerProperties, null);
-                        mailMessage = new MimeMessage(getMailSession);
-
-                        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(nd.getEmail())); //Mail người nhận
-                        System.out.println(nd.getEmail());
-//    generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
-                        mailMessage.setSubject("Thư viện bách khoa");
-                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + " sắp đến ngày hẹn trả: " + pm.getNgayTra() + " mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngayGuiMail);
-
-                        // Send mail
-                        Transport transport = getMailSession.getTransport("smtp");
-
-                        //Mail người gửi
-                        transport.connect("smtp.gmail.com", "ducnguyen871159@gmail.com", "uoduccexpojsgogy");
-                        transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
-                        transport.close();
-                        System.err.println("Success");
-                    }
-                } catch (AddressException e) {
-                    System.err.println(e);
-                }
+//                try {
+//                    if (ngay < 5 && !pm.isTrangThai()) {
+//                        Properties mailServerProperties;
+//                        Session getMailSession;
+//                        MimeMessage mailMessage;
+//
+//                        //Setup Mail server
+//                        mailServerProperties = System.getProperties();
+//                        mailServerProperties.put("mail.smtp.port", "587");
+//                        mailServerProperties.put("mail.smtp.auth", "true");
+//                        mailServerProperties.put("mail.smtp.starttls.enable", "true");
+//                        //Get Mail Session
+//                        getMailSession = Session.getDefaultInstance(mailServerProperties, null);
+//                        mailMessage = new MimeMessage(getMailSession);
+//
+//                        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(nd.getEmail())); //Mail người nhận
+//                        System.out.println(nd.getEmail());
+////    generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
+//                        mailMessage.setSubject("Thư viện bách khoa");
+//                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + " sắp đến ngày hẹn trả: " + pm.getNgayTra() + " mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngayGuiMail);
+//
+//                        // Send mail
+//                        Transport transport = getMailSession.getTransport("smtp");
+//
+//                        //Mail người gửi
+//                        transport.connect("smtp.gmail.com", "ducnguyen871159@gmail.com", "uoduccexpojsgogy");
+//                        transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+//                        transport.close();
+//                        System.err.println("Success");
+//                    }
+//                } catch (AddressException e) {
+//                    System.err.println(e);
+//                }
             }
         } catch (Exception e) {
             System.err.println(e);
