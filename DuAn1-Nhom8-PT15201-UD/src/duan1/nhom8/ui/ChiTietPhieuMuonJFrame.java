@@ -24,6 +24,7 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
         this.maPM = maPM;
         ctpm.fillCombobox(cbbSach, maPM);
         ctpm.load(tbSachMuon, maPM);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         if (!ShareHelper.USER.isVaiTro()) {
             jPanel1.setVisible(false);
@@ -412,6 +413,10 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
             if (this.index >= 0) {
                 ctpm.edit(tbSachMuon, index, maPM, txtMaTrangThai, txtNgayMuon, txtNgayTra, txtTenSach, txtTheLoai, txtViTri, rbChuaTra, rbDaTra);
                 this.setStatus(false);
+                if (rbDaTra.isSelected()) {
+                    btXoa.setEnabled(false);
+                    btSua.setEnabled(false);
+                }
                 jTabbedPane1.setSelectedIndex(1);
             }
         }
@@ -421,24 +426,40 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
         this.index = tbSachMuon.getRowCount() - 1;
         ctpm.edit(tbSachMuon, index, maPM, txtMaTrangThai, txtNgayMuon, txtNgayTra, txtTenSach, txtTheLoai, txtViTri, rbChuaTra, rbDaTra);
         this.setStatus(false);
+        if (rbDaTra.isSelected()) {
+            btXoa.setEnabled(false);
+            btSua.setEnabled(false);
+        }
     }//GEN-LAST:event_btCuoiActionPerformed
 
     private void btSauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSauActionPerformed
         this.index++;
         ctpm.edit(tbSachMuon, index, maPM, txtMaTrangThai, txtNgayMuon, txtNgayTra, txtTenSach, txtTheLoai, txtViTri, rbChuaTra, rbDaTra);
         this.setStatus(false);
+        if (rbDaTra.isSelected()) {
+            btXoa.setEnabled(false);
+            btSua.setEnabled(false);
+        }
     }//GEN-LAST:event_btSauActionPerformed
 
     private void btTruocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTruocActionPerformed
         this.index--;
         ctpm.edit(tbSachMuon, index, maPM, txtMaTrangThai, txtNgayMuon, txtNgayTra, txtTenSach, txtTheLoai, txtViTri, rbChuaTra, rbDaTra);
         this.setStatus(false);
+        if (rbDaTra.isSelected()) {
+            btXoa.setEnabled(false);
+            btSua.setEnabled(false);
+        }
     }//GEN-LAST:event_btTruocActionPerformed
 
     private void btDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDauActionPerformed
         this.index = 0;
         ctpm.edit(tbSachMuon, index, maPM, txtMaTrangThai, txtNgayMuon, txtNgayTra, txtTenSach, txtTheLoai, txtViTri, rbChuaTra, rbDaTra);
         this.setStatus(false);
+        if (rbDaTra.isSelected()) {
+            btXoa.setEnabled(false);
+            btSua.setEnabled(false);
+        }
     }//GEN-LAST:event_btDauActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed

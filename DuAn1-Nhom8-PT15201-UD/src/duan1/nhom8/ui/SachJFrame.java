@@ -23,6 +23,7 @@ public class SachJFrame extends javax.swing.JFrame {
         s.load(tbSach, txtTimKiem);
         this.clear();
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
     int index;

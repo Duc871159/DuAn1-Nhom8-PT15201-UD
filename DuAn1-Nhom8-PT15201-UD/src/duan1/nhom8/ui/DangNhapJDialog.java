@@ -29,6 +29,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         txtTenDN.setText("Ducna13");
         txxMk.setText("123");
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
     
     NguoiDungInterface nd = new NguoiDungImpl();

@@ -33,6 +33,7 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
         this.setStatus(true);
         setLocationRelativeTo(null);
         txtTaiKhoan.requestFocus();
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
     
     int index;

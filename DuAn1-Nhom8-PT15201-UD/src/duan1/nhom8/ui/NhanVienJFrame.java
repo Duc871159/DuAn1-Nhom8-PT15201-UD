@@ -24,6 +24,7 @@ public class NhanVienJFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         nv.load(tbDSNV, txtTimKiem);
         this.clear();
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
     int index;
