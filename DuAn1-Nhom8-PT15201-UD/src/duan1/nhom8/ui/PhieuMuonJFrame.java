@@ -114,18 +114,18 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
 
         tbDSPM.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Phiếu Mượn", "Người mượn", "Người tạo", "Ngày Mượn", "Ngày Trả", "Trạng thái"
+                "Mã Phiếu Mượn", "Người mượn", "Người tạo", "Ngày Mượn", "Ngày Hẹn Trả", "Trạng thái", "Phí Trả muộn"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -185,7 +185,7 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
 
         jLabel14.setText("Ngày Mượn");
 
-        jLabel15.setText("Ngày Trả");
+        jLabel15.setText("Ngày Hẹn Trả");
 
         txtMaPM.setEditable(false);
 
@@ -429,9 +429,9 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 2, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -20,6 +20,15 @@ import duan1.nhom8.model.PhieuMuon;
 import java.awt.HeadlessException;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -48,15 +57,51 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
                 NhanVien nv = nhanVienDao.findById(pm.getMaNhanVien());
                 NguoiDung nd = nguoiDungDao.findById(ndoc.getMaNguoiDung());
                 NguoiDung ndnv = nguoiDungDao.findById(nv.getMaNguoiDung());
+                long ngay = ((new Date()).getTime() - pm.getNgayTra().getTime()) / (24 * 3600 * 1000);
+                long ngayGuiMail = ((pm.getNgayTra().getTime()) - (new Date()).getTime()) / (24 * 3600 * 1000);
                 Object[] row = {
                     pm.getMaPhieuMuon(),
                     nd.getMaNguoiDung(),
                     ndnv.getMaNguoiDung(),
                     DateHelper.toString(pm.getNgayMuon()),
                     DateHelper.toString(pm.getNgayTra()),
-                    pm.isTrangThai() ? "Đã trả" : "Chưa trả"
+                    pm.isTrangThai() ? "Đã trả" : "Chưa trả",
+                    ngay > 0 && !pm.isTrangThai() ? ngay * 10000 : 0
                 };
                 model.addRow(row);
+                try {
+                    if (ngay < 5 && !pm.isTrangThai()) {
+                        Properties mailServerProperties;
+                        Session getMailSession;
+                        MimeMessage mailMessage;
+
+                        //Setup Mail server
+                        mailServerProperties = System.getProperties();
+                        mailServerProperties.put("mail.smtp.port", "587");
+                        mailServerProperties.put("mail.smtp.auth", "true");
+                        mailServerProperties.put("mail.smtp.starttls.enable", "true");
+                        //Get Mail Session
+                        getMailSession = Session.getDefaultInstance(mailServerProperties, null);
+                        mailMessage = new MimeMessage(getMailSession);
+
+                        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(nd.getEmail())); //Mail người nhận
+                        System.out.println(nd.getEmail());
+//    generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
+                        mailMessage.setSubject("Thư viện bách khoa");
+                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + " sắp đến ngày hẹn trả: " + pm.getNgayTra() + " mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngayGuiMail);
+
+                        // Send mail
+                        Transport transport = getMailSession.getTransport("smtp");
+
+                        //Mail người gửi
+                        transport.connect("smtp.gmail.com", "ducnguyen871159@gmail.com", "uoduccexpojsgogy");
+                        transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+                        transport.close();
+                        System.err.println("Success");
+                    }
+                } catch (AddressException e) {
+                    System.err.println(e);
+                }
             }
         } catch (Exception e) {
             System.err.println(e);
