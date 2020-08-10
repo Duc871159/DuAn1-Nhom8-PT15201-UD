@@ -138,7 +138,6 @@ public class CTPMImpl implements CTPMInterface {
             if (rbChuaTra.isSelected()) {
                 model.setTrangThai(false);
                 dao.update(model);
-                sachDao.updateMuon(sach);
                 return true;
             }
             if (rbDaTra.isSelected()) {

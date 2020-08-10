@@ -72,11 +72,30 @@ public class PhieuMuonDao {
     }
     
     public void update(PhieuMuon model) {
-        String sql = "Update PhieuMuon set ngayTra = ?, trangThai = ? Where maPhieuMuon = ?";
+        String sql = "Update PhieuMuon set ngayTra = ? Where maPhieuMuon = ?";
         try {
             JdbcHelper.executeUpdate(sql,
                     model.getNgayTra(),
-                    model.isTrangThai(),
+                    model.getMaPhieuMuon());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void updateTrue(PhieuMuon model) {
+        String sql = "Update PhieuMuon set trangThai = 1 Where maPhieuMuon = ?";
+        try {
+            JdbcHelper.executeUpdate(sql,
+                    model.getMaPhieuMuon());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void updateFalse(PhieuMuon model) {
+        String sql = "Update PhieuMuon set trangThai = 0 Where maPhieuMuon = ?";
+        try {
+            JdbcHelper.executeUpdate(sql,
                     model.getMaPhieuMuon());
         } catch (Exception e) {
             System.out.println(e);

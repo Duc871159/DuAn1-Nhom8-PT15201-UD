@@ -23,6 +23,7 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
      */
     public PhieuMuonJFrame() {
         initComponents();
+        pm.setTrangThai();
         pm.load(tbDSPM, txtTimKiem);
         this.setLocationRelativeTo(null);
         this.clear();
@@ -209,9 +210,11 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
         buttonGroup1.add(rbChuaTra);
         rbChuaTra.setSelected(true);
         rbChuaTra.setText("Chưa trả");
+        rbChuaTra.setEnabled(false);
 
         buttonGroup1.add(rbDaTra);
         rbDaTra.setText("Đã trả");
+        rbDaTra.setEnabled(false);
 
         btDau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/icons8-home-button-32.png"))); // NOI18N
         btDau.addActionListener(new java.awt.event.ActionListener() {
@@ -584,12 +587,12 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lbTrangThai;
     private javax.swing.JRadioButton rbChuaTra;
     private javax.swing.JRadioButton rbDaTra;
-    private javax.swing.JTable tbDSPM;
+    public javax.swing.JTable tbDSPM;
     private javax.swing.JTextField txtMaPM;
     private javax.swing.JTextField txtNgayMuon;
     private javax.swing.JTextField txtNgayTra;
     private javax.swing.JTextField txtNguoiMuon;
     private javax.swing.JTextField txtNguoiTao;
-    private javax.swing.JTextField txtTimKiem;
+    public javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

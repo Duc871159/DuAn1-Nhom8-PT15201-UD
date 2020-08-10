@@ -196,10 +196,16 @@
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbDSPMMouseClicked"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
             <Component class="javax.swing.JTextField" name="txtTimKiem">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="btTimKiem">
               <Properties>
@@ -380,6 +386,7 @@
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Ch&#x1b0;a tr&#x1ea3;"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbDaTra">
@@ -388,6 +395,7 @@
                   <ComponentRef name="buttonGroup1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x110;&#xe3; tr&#x1ea3;"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btDau">

@@ -11,6 +11,7 @@ import duan1.nhom8.dao.NhanVienDao;
 import duan1.nhom8.dao.PhieuMuonDao;
 import duan1.nhom8.helper.DateHelper;
 import duan1.nhom8.helper.DialogHelper;
+import duan1.nhom8.helper.JdbcHelper;
 import duan1.nhom8.helper.UHelper;
 import duan1.nhom8.i.PhieuMuonInterface;
 import duan1.nhom8.model.NguoiDoc;
@@ -18,6 +19,7 @@ import duan1.nhom8.model.NguoiDung;
 import duan1.nhom8.model.NhanVien;
 import duan1.nhom8.model.PhieuMuon;
 import java.awt.HeadlessException;
+import java.sql.ResultSet;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -69,39 +71,39 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
                     ngay > 0 && !pm.isTrangThai() ? ngay * 10000 : 0
                 };
                 model.addRow(row);
-                try {
-                    if (ngay < 5 && !pm.isTrangThai()) {
-                        Properties mailServerProperties;
-                        Session getMailSession;
-                        MimeMessage mailMessage;
-
-                        //Setup Mail server
-                        mailServerProperties = System.getProperties();
-                        mailServerProperties.put("mail.smtp.port", "587");
-                        mailServerProperties.put("mail.smtp.auth", "true");
-                        mailServerProperties.put("mail.smtp.starttls.enable", "true");
-                        //Get Mail Session
-                        getMailSession = Session.getDefaultInstance(mailServerProperties, null);
-                        mailMessage = new MimeMessage(getMailSession);
-
-                        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(nd.getEmail())); //Mail người nhận
-                        System.out.println(nd.getEmail());
-//    generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
-                        mailMessage.setSubject("Thư viện bách khoa");
-                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + " sắp đến ngày hẹn trả: " + pm.getNgayTra() + " mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngayGuiMail);
-
-                        // Send mail
-                        Transport transport = getMailSession.getTransport("smtp");
-
-                        //Mail người gửi
-                        transport.connect("smtp.gmail.com", "ducnguyen871159@gmail.com", "uoduccexpojsgogy");
-                        transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
-                        transport.close();
-                        System.err.println("Success");
-                    }
-                } catch (AddressException e) {
-                    System.err.println(e);
-                }
+//                try {
+//                    if (ngay < 5 && !pm.isTrangThai()) {
+//                        Properties mailServerProperties;
+//                        Session getMailSession;
+//                        MimeMessage mailMessage;
+//
+//                        //Setup Mail server
+//                        mailServerProperties = System.getProperties();
+//                        mailServerProperties.put("mail.smtp.port", "587");
+//                        mailServerProperties.put("mail.smtp.auth", "true");
+//                        mailServerProperties.put("mail.smtp.starttls.enable", "true");
+//                        //Get Mail Session
+//                        getMailSession = Session.getDefaultInstance(mailServerProperties, null);
+//                        mailMessage = new MimeMessage(getMailSession);
+//
+//                        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(nd.getEmail())); //Mail người nhận
+//                        System.out.println(nd.getEmail());
+////    generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
+//                        mailMessage.setSubject("Thư viện bách khoa");
+//                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + " sắp đến ngày hẹn trả: " + pm.getNgayTra() + " mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngayGuiMail);
+//
+//                        // Send mail
+//                        Transport transport = getMailSession.getTransport("smtp");
+//
+//                        //Mail người gửi
+//                        transport.connect("smtp.gmail.com", "ducnguyen871159@gmail.com", "uoduccexpojsgogy");
+//                        transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+//                        transport.close();
+//                        System.err.println("Success");
+//                    }
+//                } catch (AddressException e) {
+//                    System.err.println(e);
+//                }               
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -180,12 +182,6 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
             Date ngayTra = DateHelper.toDate(txtNgayTra.getText());
             java.sql.Date sqlStartDate2 = new java.sql.Date(ngayTra.getTime());
             model.setNgayTra(sqlStartDate2);
-            if (rbChuaTra.isSelected()) {
-                model.setTrangThai(false);
-            }
-            if (rbDaTra.isSelected()) {
-                model.setTrangThai(true);
-            }
             dao.update(model);
             return true;
         } catch (Exception e) {
@@ -206,5 +202,28 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
             }
         }
         return false;
+    }
+
+    @Override
+    public void setTrangThai() {
+        List<PhieuMuon> list = dao.select();
+        try {
+            for (PhieuMuon pm : list) {
+                String tongSo = "Select COUNT(maPhieuMuon) as tongso from trangThaiSach where maPhieuMuon = ?";
+                String hienTai = "Select COUNT(maPhieuMuon) as hientai from trangThaiSach where maPhieuMuon = ? and trangThai = 1";
+
+                ResultSet rs = JdbcHelper.executeQuery(tongSo, pm.getMaPhieuMuon());
+                ResultSet rs1 = JdbcHelper.executeQuery(hienTai, pm.getMaPhieuMuon());
+                while (rs.next() && rs1.next()) {
+                    if (rs.getInt("tongso") == rs1.getInt("hientai")) {
+                        dao.updateTrue(pm);
+                    }
+                    if (rs.getInt("tongso") != rs1.getInt("hientai")) {
+                        dao.updateFalse(pm);
+                    }
+                }
+            }
+        } catch (Exception e) {
+        }
     }
 }

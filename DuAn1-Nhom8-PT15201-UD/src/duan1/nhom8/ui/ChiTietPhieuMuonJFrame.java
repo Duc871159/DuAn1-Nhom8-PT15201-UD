@@ -474,7 +474,11 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
         if (ctpm.update(txtMaTrangThai, rbChuaTra, rbDaTra)) {
             ctpm.fillCombobox(cbbSach, maPM);
             ctpm.load(tbSachMuon, maPM);
-            DialogHelper.alert(this, "Cập nhật thành công");
+            if (rbDaTra.isSelected()) {
+                this.setStatus(false);
+                btXoa.setEnabled(false);
+                btSua.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_btSuaActionPerformed
 
