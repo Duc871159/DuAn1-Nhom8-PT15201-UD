@@ -43,7 +43,7 @@ public class SachImpl implements SachInterface {
                     s.getTacGia(),
                     s.getNhaXuatBan(),
                     s.getViTri(),
-                    s.getSoLuong() > 0 ? "Chưa cho mượn" : "Đã cho mượn"
+                    s.getSoLuong() > 0 ? true : false
                 };
                 model.addRow(row);
             }

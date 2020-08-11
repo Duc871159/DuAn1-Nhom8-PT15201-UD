@@ -21,5 +21,6 @@ public interface PhieuMuonInterface {
     boolean update(JTextField txtMaPM, JTextField txtNgayTra, JRadioButton rbChuaTra, JRadioButton rbDaTra);
     boolean delete(JTextField txtMaPM);
     boolean edit(JTable tbDSPM, int index, JTextField txtMaPM, JTextField txtNguoiMuon, JTextField txtNguoiTra, JTextField txtNgayMuon, JTextField txtNgayTra, JRadioButton rbChuaTra, JRadioButton rbDaTra);
-    void setTrangThai();
+    void setStatus();
+    void sendMail();
 }

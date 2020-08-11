@@ -15,6 +15,7 @@ public class PhieuMuon {
     private int maPhieuMuon;
     private Date NgayMuon;
     private Date NgayTra;
+    private int guiMail;
     private int maNguoiDoc;
     private int maNhanVien;
     private boolean trangThai;
@@ -41,6 +42,14 @@ public class PhieuMuon {
 
     public void setNgayTra(Date NgayTra) {
         this.NgayTra = NgayTra;
+    }
+
+    public int getGuiMail() {
+        return guiMail;
+    }
+
+    public void setGuiMail(int guiMail) {
+        this.guiMail = guiMail;
     }
 
     public int getMaNguoiDoc() {

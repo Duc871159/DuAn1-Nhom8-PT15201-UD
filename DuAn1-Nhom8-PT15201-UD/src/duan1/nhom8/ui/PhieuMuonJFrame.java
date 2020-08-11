@@ -23,8 +23,9 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
      */
     public PhieuMuonJFrame() {
         initComponents();
-        pm.setTrangThai();
-        pm.load(tbDSPM, txtTimKiem);
+        pm.setStatus();
+        pm.sendMail();
+        pm.load(tbDSPM, txtTimKiem);        
         this.setLocationRelativeTo(null);
         this.clear();
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -122,7 +123,7 @@ public class PhieuMuonJFrame extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Phiếu Mượn", "Người mượn", "Người tạo", "Ngày Mượn", "Ngày Hẹn Trả", "Trạng thái", "Phí Trả muộn"
+                "Mã Phiếu Mượn", "Người mượn", "Người tạo", "Ngày mượn", "Ngày hẹn trả", "Trạng thái", "Phí Trả muộn"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -57,6 +57,7 @@ Create table phieuMuon(
 	maPhieuMuon		int not null identity(1, 1) primary key,
 	ngayMuon		date not null,
 	ngayTra			date not null,
+	guiMail			int not null Default(0),
 	maNguoidoc		int not null foreign key(maNguoiDoc) references NguoiDoc,
 	maNhanVien		int not null foreign key(maNhanVien) references NhanVien,
 	trangThai		bit not null default(0)
@@ -83,13 +84,14 @@ Insert into sach values(N'Tiền Đấu Với Vàng', N'Kinh tế', N'James Rick
 Insert into sach values(N'Sổ Tay Nhà Thôi Miên', N'Tâm lý', N'Cao Minh', N'NXB Thế Giới', N'Kệ A1 - Hàng 4', 2, null)
 
 Insert into nguoiDung values('ducna13', '123', 1, N'Nguyễn Anh Đức', N'Hà Nội', 1, '12/13/2000', 'Ducna13@gmail.com', '0333188195', null)
-Insert into nguoiDung values('nguoidung1', '321', 0, N'Người dùng 1', N'Hà Nội', 1, '11/14/1994', 'nd01@gmail.com', '0333183456', null)
+Insert into nguoiDung values('nguoidung1', '321', 0, N'Người dùng 1', N'Hà Nội', 1, '11/14/1994', 'Ducnaph07089@fpt.edu.com', '0333183456', null)
 
 Insert into nhanVien values(1, 4000000, 'ducna13')
 
 Insert into nguoiDoc values('nguoidung1')
 
-Insert into phieuMuon values('07/28/2020', '08/04/2020', 1, 1, 0)
+Insert into phieuMuon values('07/28/2020', '08/04/2020', 0, 1, 1, 0)
+
 
 Insert into trangThaiSach values(1, 1, 0)
 Insert into trangThaiSach values(2, 1, 0)

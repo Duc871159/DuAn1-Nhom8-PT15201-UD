@@ -86,4 +86,10 @@ public class TrangThaiSachDao {
         List<TrangThaiSach> list = select(sql, maTT);
         return list.size() > 0 ? list.get(0) : null;
     }
+    
+    public TrangThaiSach findByMaPM(Integer maPM) {
+        String sql = "Select * From TrangThaiSach Where maPhieuMuon = ? and TrangThai = 0";
+        List<TrangThaiSach> list = select(sql, maPM);
+        return list.size() > 0 ? list.get(0) : null;
+    }
 }

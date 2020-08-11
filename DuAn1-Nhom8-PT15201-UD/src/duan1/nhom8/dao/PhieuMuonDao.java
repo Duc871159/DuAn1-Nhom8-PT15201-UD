@@ -26,6 +26,7 @@ public class PhieuMuonDao {
         model.setMaNhanVien(rs.getInt("MaNhanVien"));
         model.setNgayMuon(rs.getDate("NgayMuon"));
         model.setNgayTra(rs.getDate("NgayTra"));
+        model.setGuiMail(rs.getInt("GuiMail"));
         model.setTrangThai(rs.getBoolean("TrangThai"));
         return model;
     }
@@ -59,7 +60,7 @@ public class PhieuMuonDao {
     }
     
     public void save(PhieuMuon model) {
-        String sql = "Insert Into PhieuMuon (maNguoiDoc, maNhanVien, ngayMuon, ngayTra) Values (?, ?, ?, ?)";
+        String sql = "Insert Into PhieuMuon (maNguoiDoc, maNhanVien, ngayMuon, ngayTra, trangthai) Values (?, ?, ?, ?, 0)";
         try {
             JdbcHelper.executeUpdate(sql,
                     model.getMaNguoiDoc(),
@@ -76,6 +77,16 @@ public class PhieuMuonDao {
         try {
             JdbcHelper.executeUpdate(sql,
                     model.getNgayTra(),
+                    model.getMaPhieuMuon());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void updateGuiMail(PhieuMuon model) {
+        String sql = "Update PhieuMuon set guiMail = guiMail + 1 Where maPhieuMuon = ?";
+        try {
+            JdbcHelper.executeUpdate(sql,
                     model.getMaPhieuMuon());
         } catch (Exception e) {
             System.out.println(e);

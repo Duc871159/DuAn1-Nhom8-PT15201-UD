@@ -9,6 +9,8 @@ import duan1.nhom8.dao.NguoiDocDao;
 import duan1.nhom8.dao.NguoiDungDao;
 import duan1.nhom8.dao.NhanVienDao;
 import duan1.nhom8.dao.PhieuMuonDao;
+import duan1.nhom8.dao.SachDao;
+import duan1.nhom8.dao.TrangThaiSachDao;
 import duan1.nhom8.helper.DateHelper;
 import duan1.nhom8.helper.DialogHelper;
 import duan1.nhom8.helper.JdbcHelper;
@@ -24,11 +26,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JRadioButton;
@@ -46,6 +45,8 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
     NguoiDungDao nguoiDungDao = new NguoiDungDao();
     NguoiDocDao nguoiDocDao = new NguoiDocDao();
     NhanVienDao nhanVienDao = new NhanVienDao();
+    TrangThaiSachDao ttsDao = new TrangThaiSachDao();
+    SachDao sachDao = new SachDao();
 
     @Override
     public void load(JTable tbDSPM, JTextField txtTimKiem) {
@@ -60,7 +61,6 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
                 NguoiDung nd = nguoiDungDao.findById(ndoc.getMaNguoiDung());
                 NguoiDung ndnv = nguoiDungDao.findById(nv.getMaNguoiDung());
                 long ngay = ((new Date()).getTime() - pm.getNgayTra().getTime()) / (24 * 3600 * 1000);
-                long ngayGuiMail = ((pm.getNgayTra().getTime()) - (new Date()).getTime()) / (24 * 3600 * 1000);
                 Object[] row = {
                     pm.getMaPhieuMuon(),
                     nd.getMaNguoiDung(),
@@ -71,39 +71,6 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
                     ngay > 0 && !pm.isTrangThai() ? ngay * 10000 : 0
                 };
                 model.addRow(row);
-//                try {
-//                    if (ngay < 5 && !pm.isTrangThai()) {
-//                        Properties mailServerProperties;
-//                        Session getMailSession;
-//                        MimeMessage mailMessage;
-//
-//                        //Setup Mail server
-//                        mailServerProperties = System.getProperties();
-//                        mailServerProperties.put("mail.smtp.port", "587");
-//                        mailServerProperties.put("mail.smtp.auth", "true");
-//                        mailServerProperties.put("mail.smtp.starttls.enable", "true");
-//                        //Get Mail Session
-//                        getMailSession = Session.getDefaultInstance(mailServerProperties, null);
-//                        mailMessage = new MimeMessage(getMailSession);
-//
-//                        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(nd.getEmail())); //Mail người nhận
-//                        System.out.println(nd.getEmail());
-////    generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
-//                        mailMessage.setSubject("Thư viện bách khoa");
-//                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + " sắp đến ngày hẹn trả: " + pm.getNgayTra() + " mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngayGuiMail);
-//
-//                        // Send mail
-//                        Transport transport = getMailSession.getTransport("smtp");
-//
-//                        //Mail người gửi
-//                        transport.connect("smtp.gmail.com", "ducnguyen871159@gmail.com", "uoduccexpojsgogy");
-//                        transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
-//                        transport.close();
-//                        System.err.println("Success");
-//                    }
-//                } catch (AddressException e) {
-//                    System.err.println(e);
-//                }               
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -205,7 +172,7 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
     }
 
     @Override
-    public void setTrangThai() {
+    public void setStatus() {
         List<PhieuMuon> list = dao.select();
         try {
             for (PhieuMuon pm : list) {
@@ -224,6 +191,82 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
                 }
             }
         } catch (Exception e) {
+        }
+    }
+
+    @Override
+    public void sendMail() {
+        try {
+            List<PhieuMuon> list = dao.select();
+            for (PhieuMuon pm : list) {
+                NguoiDoc ndoc = nguoiDocDao.findById(pm.getMaNguoiDoc());
+                NguoiDung nd = nguoiDungDao.findById(ndoc.getMaNguoiDung());
+                long ngay = ((new Date()).getTime() - pm.getNgayTra().getTime()) / (24 * 3600 * 1000);
+                long ngayGuiMail = ((pm.getNgayTra().getTime()) - (new Date()).getTime()) / (24 * 3600 * 1000) + 1;
+                System.out.println("So ngay muon: " + ngay);
+                System.out.println("So con lai: " + ngayGuiMail);
+                Properties mailServerProperties;
+                Session getMailSession;
+                MimeMessage mailMessage;
+
+                //Setup Mail server
+                mailServerProperties = System.getProperties();
+                mailServerProperties.put("mail.smtp.port", "587");
+                mailServerProperties.put("mail.smtp.auth", "true");
+                mailServerProperties.put("mail.smtp.starttls.enable", "true");
+                //Get Mail Session
+                getMailSession = Session.getDefaultInstance(mailServerProperties, null);
+                mailMessage = new MimeMessage(getMailSession);
+
+                mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(nd.getEmail())); //Mail người nhận
+                System.out.println(nd.getEmail());
+//                  generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
+                mailMessage.setSubject("Thư viện bách khoa");
+                if (!pm.isTrangThai()) {
+                    if (ngay == 3 && pm.getGuiMail() == 4) {
+                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
+                                + "Ngày hẹn trả: " + pm.getNgayTra() + "\n"
+                                + "Bạn đã quá hạn trả sách: " + ngay + " ngày \n"
+                                + "Số tiền phạt trả muộn: " + ngay * 10000 + "đ");
+                        dao.updateGuiMail(pm);
+                    }
+                    if (ngay == 1 && pm.getGuiMail() == 3) {
+                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
+                                + "Ngày hẹn trả: " + pm.getNgayTra() + "\n"
+                                + "Bạn đã quá hạn trả sách: " + ngay + " ngày \n"
+                                + "Số tiền phạt trả muộn: " + ngay * 10000 + "đ");
+                        dao.updateGuiMail(pm);
+                    }
+                    if (ngay == 0 && pm.getGuiMail() == 2) {
+                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
+                                + "Ngày hẹn trả (hôm nay): " + pm.getNgayTra() + "\n"
+                                + "Mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngay);
+                        dao.updateGuiMail(pm);
+                    }
+                    if (ngayGuiMail == 1 && pm.getGuiMail() == 1) {
+                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
+                                + "Ngày hẹn trả: " + pm.getNgayTra() + "\n"
+                                + "Mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngayGuiMail);
+                        dao.updateGuiMail(pm);
+                    }
+                    if (ngayGuiMail == 5 && pm.getGuiMail() == 0) {
+                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
+                                + "Ngày hẹn trả: " + pm.getNgayTra() + "\n"
+                                + "Mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngayGuiMail);
+                        dao.updateGuiMail(pm);
+                    }
+                    // Send mail
+                    Transport transport = getMailSession.getTransport("smtp");
+
+                    //Mail người gửi
+                    transport.connect("smtp.gmail.com", "ducnguyen871159@gmail.com", "uoduccexpojsgogy");
+                    transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+                    transport.close();
+                    System.err.println("Success");
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e);
         }
     }
 }
