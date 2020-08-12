@@ -222,39 +222,69 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
                 System.out.println(nd.getEmail());
 //                  generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
                 mailMessage.setSubject("Thư viện bách khoa");
-                if (!pm.isTrangThai()) {
-                    if (ngay == 3 && pm.getGuiMail() == 4) {
-                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
-                                + "Ngày hẹn trả: " + pm.getNgayTra() + "\n"
-                                + "Bạn đã quá hạn trả sách: " + ngay + " ngày \n"
-                                + "Số tiền phạt trả muộn: " + ngay * 10000 + "đ");
-                        dao.updateGuiMail(pm);
-                    }
-                    if (ngay == 1 && pm.getGuiMail() == 3) {
-                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
-                                + "Ngày hẹn trả: " + pm.getNgayTra() + "\n"
-                                + "Bạn đã quá hạn trả sách: " + ngay + " ngày \n"
-                                + "Số tiền phạt trả muộn: " + ngay * 10000 + "đ");
-                        dao.updateGuiMail(pm);
-                    }
-                    if (ngay == 0 && pm.getGuiMail() == 2) {
-                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
-                                + "Ngày hẹn trả (hôm nay): " + pm.getNgayTra() + "\n"
-                                + "Mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngay);
-                        dao.updateGuiMail(pm);
-                    }
-                    if (ngayGuiMail == 1 && pm.getGuiMail() == 1) {
-                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
-                                + "Ngày hẹn trả: " + pm.getNgayTra() + "\n"
-                                + "Mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngayGuiMail);
-                        dao.updateGuiMail(pm);
-                    }
-                    if (ngayGuiMail == 5 && pm.getGuiMail() == 0) {
-                        mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
-                                + "Ngày hẹn trả: " + pm.getNgayTra() + "\n"
-                                + "Mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngayGuiMail);
-                        dao.updateGuiMail(pm);
-                    }
+                if (!pm.isTrangThai() && ngay == 3 && pm.getGuiMail() == 4) {
+                    mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
+                            + "Ngày hẹn trả: " + pm.getNgayTra() + "\n"
+                            + "Bạn đã quá hạn trả sách: " + ngay + " ngày \n"
+                            + "Số tiền phạt trả muộn: " + ngay * 10000 + "đ");
+                    dao.updateGuiMail(pm);
+                    // Send mail
+                    Transport transport = getMailSession.getTransport("smtp");
+
+                    //Mail người gửi
+                    transport.connect("smtp.gmail.com", "ducnguyen871159@gmail.com", "uoduccexpojsgogy");
+                    transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+                    transport.close();
+                    System.err.println("Success");
+                }
+                if (!pm.isTrangThai() && ngay == 1 && pm.getGuiMail() == 3) {
+                    mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
+                            + "Ngày hẹn trả: " + pm.getNgayTra() + "\n"
+                            + "Bạn đã quá hạn trả sách: " + ngay + " ngày \n"
+                            + "Số tiền phạt trả muộn: " + ngay * 10000 + "đ");
+                    dao.updateGuiMail(pm);
+                    // Send mail
+                    Transport transport = getMailSession.getTransport("smtp");
+
+                    //Mail người gửi
+                    transport.connect("smtp.gmail.com", "ducnguyen871159@gmail.com", "uoduccexpojsgogy");
+                    transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+                    transport.close();
+                    System.err.println("Success");
+                }
+                if (!pm.isTrangThai() && ngay == 0 && pm.getGuiMail() == 2) {
+                    mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
+                            + "Ngày hẹn trả (hôm nay): " + pm.getNgayTra() + "\n"
+                            + "Mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngay);
+                    dao.updateGuiMail(pm);
+                    // Send mail
+                    Transport transport = getMailSession.getTransport("smtp");
+
+                    //Mail người gửi
+                    transport.connect("smtp.gmail.com", "ducnguyen871159@gmail.com", "uoduccexpojsgogy");
+                    transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+                    transport.close();
+                    System.err.println("Success");
+                }
+                if (!pm.isTrangThai() && ngayGuiMail == 1 && pm.getGuiMail() == 1) {
+                    mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
+                            + "Ngày hẹn trả: " + pm.getNgayTra() + "\n"
+                            + "Mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngayGuiMail);
+                    dao.updateGuiMail(pm);
+                    // Send mail
+                    Transport transport = getMailSession.getTransport("smtp");
+
+                    //Mail người gửi
+                    transport.connect("smtp.gmail.com", "ducnguyen871159@gmail.com", "uoduccexpojsgogy");
+                    transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+                    transport.close();
+                    System.err.println("Success");
+                }
+                if (!pm.isTrangThai() && ngayGuiMail == 5 && pm.getGuiMail() == 0) {
+                    mailMessage.setText("Phiếu mượn có mã: " + pm.getMaPhieuMuon() + "\n"
+                            + "Ngày hẹn trả: " + pm.getNgayTra() + "\n"
+                            + "Mong bạn lưu ý trả sách đúng thời hạn, số ngày còn lại: " + ngayGuiMail);
+                    dao.updateGuiMail(pm);
                     // Send mail
                     Transport transport = getMailSession.getTransport("smtp");
 
