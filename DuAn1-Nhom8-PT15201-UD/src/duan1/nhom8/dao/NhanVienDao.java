@@ -29,6 +29,11 @@ public class NhanVienDao {
         model.setSoDienThoai(rs.getString("SoDienThoai"));
         model.setEmail(rs.getString("Email"));
         model.setGioiTinh(rs.getBoolean("GioiTinh"));
+        model.setNgaySinh(rs.getDate("NgaySinh"));
+        model.setMatKhau(rs.getString("MatKhau"));
+        model.setDiaChi(rs.getString("DiaChi"));
+        model.setVaiTro(rs.getBoolean("VaiTro"));
+        model.setHinhAnh(rs.getString("HinhAnh"));
         return model;
     }
     
@@ -93,11 +98,11 @@ public class NhanVienDao {
         return select(sql);
     }
 
-    public List<NguoiDungNhanVien> selectByKeyword(String key1, String key2, String key3, String key4, String key5, String key6, String key7) {
-        String sql = "Select nv.maNhanVien, nv.maNguoiDung, nv.caLamviec, nv.luong, nd.HoTen, nd.GioiTinh, nd.SoDienThoai, nd.Email\n"
+    public List<NguoiDungNhanVien> selectByKeyword(String key1, String key2, String key3, String key4, String key5, String key6, String key7, String key8, String key9) {
+        String sql = "Select nv.maNhanVien, nv.caLamviec, nv.luong, nd.*\n"
                 + "from nhanVien as nv inner join nguoiDung as nd on nv.maNguoiDung = nd.maNguoiDung\n"
-                + "where nv.maNhanVien like ? or nv.caLamviec like ? or nv.luong like ? or nv.maNguoiDung like ? or nd.HoTen like ? or nd.SoDienThoai like ? or nd.email like ?";
-        return select(sql, "%" + key1 + "%", "%" + key2 + "%", "%" + key3 + "%", "%" + key4 + "%", "%" + key5 + "%", "%" + key6 + "%", "%" + key7 + "%");
+                + "where (nv.maNhanVien like ? or nv.caLamviec like ? or nv.luong like ? or nd.maNguoiDung like ? or nd.HoTen like ? or nd.SoDienThoai like ? or nd.email like ? or nd.diaChi like ? or nd.NgaySinh like ?) and nd.vaitro = 1";
+        return select(sql, "%" + key1 + "%", "%" + key2 + "%", "%" + key3 + "%", "%" + key4 + "%", "%" + key5 + "%", "%" + key6 + "%", "%" + key7 + "%", "%" + key8 + "%", "%" + key9 + "%");
     }
     
     public void save(NhanVien model) {
@@ -135,7 +140,7 @@ public class NhanVienDao {
     }
     
     public NguoiDungNhanVien findById(Integer maNV){
-        String sql = "Select nv.maNhanVien, nv.maNguoiDung, nv.caLamviec, nv.luong, nd.HoTen, nd.GioiTinh, nd.SoDienThoai, nd.Email\n"
+        String sql = "Select nv.maNhanVien, nv.caLamviec, nv.luong, nd.*\n"
                 + "from nhanVien as nv inner join nguoiDung as nd on nv.maNguoiDung = nd.maNguoiDung\n"
                 + "where nv.maNhanVien = ?";
         List<NguoiDungNhanVien> list = select(sql, maNV);

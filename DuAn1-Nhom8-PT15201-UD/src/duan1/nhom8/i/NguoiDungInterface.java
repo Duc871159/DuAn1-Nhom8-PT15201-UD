@@ -20,9 +20,14 @@ import javax.swing.JTextField;
 public interface NguoiDungInterface {
     boolean login(JTextField txtUser, JPasswordField txtPass);   
     void load(JTable tbDSND, JTextField txtTimKiem);    
-    boolean save(JTextField txtTaiKhoan, JPasswordField matKhau, JRadioButton rbNhanVien, JRadioButton rbNguoiDoc, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDIenThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);    
-    boolean update(JTable tbDSND, int index, JTextField txtTaiKhoan, JPasswordField matKhau, JRadioButton rbNhanVien, JRadioButton rbNguoiDoc, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDIenThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);   
+    boolean saveKhachHang(JTextField txtTaiKhoan, JPasswordField matKhau, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDIenThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);    
+    boolean saveNhanVien(JTextField txtTaiKhoan, JPasswordField matKhau, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDIenThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);
+    boolean updateKhachHang(JTable tbDSND, int index, JTextField txtTaiKhoan, JPasswordField matKhau, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDIenThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);
     boolean delete(JTextField txtTaiKhoan);   
     void selectImage(JLabel lblHinhAnh);
-    boolean edit(JTable tbDSND, int index, JTextField txtTaiKhoan, JPasswordField txxMatKhau, JRadioButton rbNhanVien, JRadioButton rbNguoiDoc, JTextField txtHoVaTen, JTextField txtNgaySinh, JTextField txtSoDienThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);
+    boolean edit(JTable tbDSND, int index, JTextField txtTaiKhoan, JPasswordField txxMatKhau, JTextField txtHoVaTen, JTextField txtNgaySinh, JTextField txtSoDienThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);
+    void editPassword(JPasswordField txxMatKhauMoi, JPasswordField txxMatKhau, JPasswordField txxNhapLaiMatKhau);
+    void loadCaNhan(String maNguoiDung, JTextField txtHoVaTen, JTextField txtNgaySinh, JTextField txtSoDienThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);
+    boolean updateCaNhan(String maNguoiDung, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDIenThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);
+    boolean updateNhanVien(JTable tbDSND, int index, JTextField txtTaiKhoan, JPasswordField matKhau, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDIenThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);
 }

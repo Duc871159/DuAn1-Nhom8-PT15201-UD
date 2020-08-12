@@ -31,7 +31,7 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
         nd.load(tbDSNguoiDung, txtTimKiem);
         txtNgaySinh.setText(DateHelper.toString(DateHelper.now()));
         this.setStatus(true);
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         txtTaiKhoan.requestFocus();
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
@@ -42,11 +42,6 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
     public void setModel(NguoiDung model){
         txtTaiKhoan.setText(model.getMaNguoiDung());
         txxMatKhau.setText(model.getMatKhau());
-        if (model.isVaiTro()) {
-            rbNhanVien.setSelected(true);
-        } if (!model.isVaiTro()) {
-            rbNguoiDoc.setSelected(true);
-        }
         txtHoVaTen.setText(model.getHoTen());
         txtNgaySinh.setText(DateHelper.toString(model.getNgaySinh()));
         txtSoDienThoai.setText(model.getSoDienThoai());
@@ -84,7 +79,6 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
         txtSoDienThoai.setText("");
         txtTimKiem.setText("");
         txtDiaChi.setText("");
-        rbNguoiDoc.setSelected(true);
         rbNam.setSelected(true);
         this.setStatus(true);
     }
@@ -101,7 +95,6 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
         lblHinhAnh = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txtTaiKhoan = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -115,8 +108,6 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
         rbNu = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
         txxMatKhau = new javax.swing.JPasswordField();
-        rbNhanVien = new javax.swing.JRadioButton();
-        rbNguoiDoc = new javax.swing.JRadioButton();
         txtEmail = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDiaChi = new javax.swing.JTextArea();
@@ -156,8 +147,6 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
 
         jLabel4.setText("Họ Và Tên");
 
-        jLabel2.setText("Vai Trò");
-
         jLabel9.setText("Số điện thoại");
 
         jLabel6.setText("Ngày Sinh");
@@ -187,13 +176,6 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
         });
 
         jLabel11.setText("Mật khẩu");
-
-        buttonGroup2.add(rbNhanVien);
-        rbNhanVien.setText("Nhân viên");
-
-        buttonGroup2.add(rbNguoiDoc);
-        rbNguoiDoc.setSelected(true);
-        rbNguoiDoc.setText("Người đọc");
 
         txtDiaChi.setColumns(20);
         txtDiaChi.setRows(5);
@@ -248,16 +230,9 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel11)
                                 .addGap(22, 22, 22)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txxMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(rbNguoiDoc)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(rbNhanVien))))
+                                .addComponent(txxMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
@@ -312,25 +287,24 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbNguoiDoc)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rbNam)
-                            .addComponent(rbNu)
-                            .addComponent(rbNhanVien))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rbNam)
+                                    .addComponent(rbNu))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtHoVaTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel4))
                                 .addGap(19, 19, 19)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(lblHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -347,18 +321,18 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
 
         tbDSNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Tài khoản", "Mật khẩu", "Vai Trò", "Họ tên", "Địa Chỉ", "Giới tính", "Ngày Sinh", "Email", "Số ĐT", "Hình ảnh"
+                "Tài khoản", "Mật khẩu", "Họ tên", "Địa Chỉ", "Giới tính", "Ngày Sinh", "Email", "Số ĐT", "Hình ảnh"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -518,7 +492,7 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
 
     private void btTruocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTruocActionPerformed
         this.index--;
-        if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
+        if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
             this.setStatus(false);
         }
     }//GEN-LAST:event_btTruocActionPerformed
@@ -536,7 +510,7 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_lblHinhAnhMouseClicked
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
-        if (nd.save(txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
+        if (nd.saveKhachHang(txtTaiKhoan, txxMatKhau, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
             nd.load(tbDSNguoiDung, txtTimKiem);
             DialogHelper.alert(this, "Thêm tài khoản thành công");
         }
@@ -554,7 +528,7 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
             this.index = tbDSNguoiDung.rowAtPoint(evt.getPoint());
             if (this.index >= 0) {
-                if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
+                if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
                     this.setStatus(false);
                 }
             }
@@ -567,27 +541,27 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
 
     private void btDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDauActionPerformed
         this.index = 0;
-        if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
+        if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
             this.setStatus(false);
         }
     }//GEN-LAST:event_btDauActionPerformed
 
     private void btSauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSauActionPerformed
         this.index++;
-        if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
+        if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
             this.setStatus(false);
         }
     }//GEN-LAST:event_btSauActionPerformed
 
     private void btCuoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCuoiActionPerformed
         this.index = tbDSNguoiDung.getRowCount() - 1;
-        if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
+        if (nd.edit(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
             this.setStatus(false);
         }
     }//GEN-LAST:event_btCuoiActionPerformed
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
-        if (nd.update(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, rbNhanVien, rbNguoiDoc, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
+        if (nd.updateKhachHang(tbDSNguoiDung, index, txtTaiKhoan, txxMatKhau, txtHoVaTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
             nd.load(tbDSNguoiDung, txtTimKiem);
             DialogHelper.alert(this, "Sửa tài khoản thành công");
         }
@@ -643,7 +617,6 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -658,8 +631,6 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblHinhAnh;
     private javax.swing.JRadioButton rbNam;
-    private javax.swing.JRadioButton rbNguoiDoc;
-    private javax.swing.JRadioButton rbNhanVien;
     private javax.swing.JRadioButton rbNu;
     private javax.swing.JTable tbDSNguoiDung;
     private javax.swing.JTextArea txtDiaChi;

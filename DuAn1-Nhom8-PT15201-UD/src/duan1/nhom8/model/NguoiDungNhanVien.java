@@ -5,6 +5,8 @@
  */
 package duan1.nhom8.model;
 
+import java.util.Date;
+
 /**
  *
  * @author User
@@ -14,10 +16,55 @@ public class NguoiDungNhanVien {
     private int caLamViec;
     private float luong;
     private String maNguoiDung;
+    private String matKhau;
     private String hoTen;
+    private Date ngaySinh;
     private String email;
     private String soDienThoai;
     private boolean gioiTinh;
+    private String diaChi;
+    private boolean vaiTro;
+    private String hinhAnh;
+
+    public String getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
+    }
+
+    public boolean isVaiTro() {
+        return vaiTro;
+    }
+
+    public void setVaiTro(boolean vaiTro) {
+        this.vaiTro = vaiTro;
+    }
+
+    public String getMatKhau() {
+        return matKhau;
+    }
+
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
+    }
+
+    public Date getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
 
     public int getMaNhanVien() {
         return maNhanVien;

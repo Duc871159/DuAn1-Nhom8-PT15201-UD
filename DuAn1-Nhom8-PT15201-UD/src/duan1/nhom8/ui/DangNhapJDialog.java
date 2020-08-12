@@ -28,7 +28,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         txtTenDN.setText("Ducna13");
-        txxMk.setText("123");
+        txxMk.setText("111");
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
     
@@ -142,6 +142,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         if (nd.login(txtTenDN, txxMk)) {
             this.dispose();
             TrangChuJFrame tt = new TrangChuJFrame();
+            tt.dispose();
             tt.setVisible(true);
         } else{
         }

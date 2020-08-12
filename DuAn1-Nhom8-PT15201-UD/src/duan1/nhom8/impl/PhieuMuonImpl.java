@@ -20,6 +20,7 @@ import duan1.nhom8.model.NguoiDoc;
 import duan1.nhom8.model.NguoiDung;
 import duan1.nhom8.model.NhanVien;
 import duan1.nhom8.model.PhieuMuon;
+import duan1.nhom8.model.TrangThaiSach;
 import java.awt.HeadlessException;
 import java.sql.ResultSet;
 import java.util.Date;
@@ -161,6 +162,11 @@ public class PhieuMuonImpl implements PhieuMuonInterface {
         if (DialogHelper.confirm(null, "Bạn thực sự muốn xóa phiếu mượn này?")) {
             Integer maPM = Integer.valueOf(txtMaPM.getText());
             try {
+                TrangThaiSach tts = ttsDao.findByMaPhieuMuon(maPM);
+                if (tts != null) {
+                    DialogHelper.alert(null, "Không thể xóa phiếu mượn này (trong phiếu mượn này có sách mượn)");
+                    return false;
+                }
                 PhieuMuon model = dao.findById(maPM);
                 dao.delete(model);
                 return true;

@@ -29,6 +29,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             jMenu4.setVisible(false);
             jMenu2.setVisible(false);
             mnDangXuat.setVisible(false);
+            mnDoiMatKhau.setVisible(false);
         }
         if (ShareHelper.authenticated()) {
             if (ShareHelper.USER.isVaiTro() == true) {
@@ -59,7 +60,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
 
     void logoff() {
         ShareHelper.logoff();
-        this.login();
+        this.login();       
     }
 
     void openPhieuMuon() {
@@ -102,6 +103,28 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             NguoiDoc nd = ndDao.findByMaND(ShareHelper.USER.getMaNguoiDung());
             PhieuMuonCuaToiJFrame pmct = new PhieuMuonCuaToiJFrame(nd.getMaNguoiDoc());
             pmct.setVisible(true);
+        } else {
+            DialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+    
+    void openDoiMatKhau() {
+        if (ShareHelper.authenticated()) {           
+            DoiMatKhauJFrame dmk = new DoiMatKhauJFrame();
+            jDesktopPane1.add(dmk);
+            dmk.setLocation(this.getWidth() / 2 - dmk.getWidth() / 2, this.getHeight() / 2 - dmk.getHeight() / 2);
+            dmk.setVisible(true);
+        } else {
+            DialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+    
+    void openCaNhan() {
+        if (ShareHelper.authenticated()) {         
+            CaNhanJFrame cn = new CaNhanJFrame(ShareHelper.USER.getMaNguoiDung());
+            jDesktopPane1.add(cn);
+            cn.setLocation(this.getWidth() / 2 - cn.getWidth() / 2, this.getHeight() / 2 - cn.getHeight() / 2);
+            cn.setVisible(true);
         } else {
             DialogHelper.alert(this, "Vui lòng đăng nhập!");
         }
@@ -170,10 +193,15 @@ public class TrangChuJFrame extends javax.swing.JFrame {
 
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Clien list.png"))); // NOI18N
-        jButton1.setText("Cá nhân");
+        jButton1.setText("Thông tin tài khảon");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton1);
 
         btnPhieuMuonCuaToi.setForeground(new java.awt.Color(255, 255, 255));
@@ -347,7 +375,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         jMenu2.setText("Quản Lý");
 
         mtTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/duan1/nhom8/icon/Conference.png"))); // NOI18N
-        mtTaiKhoan.setText("Người dùng");
+        mtTaiKhoan.setText("Khách hàng");
         mtTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mtTaiKhoanActionPerformed(evt);
@@ -464,7 +492,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPhieuMuonCuaToiActionPerformed
 
     private void mnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnDoiMatKhauActionPerformed
-        // TODO add your handling code here:
+        this.openDoiMatKhau();
     }//GEN-LAST:event_mnDoiMatKhauActionPerformed
 
     private void mnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnKetThucActionPerformed
@@ -478,6 +506,10 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     private void mnSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSachActionPerformed
         this.openSach();
     }//GEN-LAST:event_mnSachActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.openCaNhan();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

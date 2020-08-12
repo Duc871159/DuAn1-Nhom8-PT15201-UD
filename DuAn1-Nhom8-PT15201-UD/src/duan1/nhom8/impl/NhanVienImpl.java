@@ -7,7 +7,9 @@ package duan1.nhom8.impl;
 
 import duan1.nhom8.dao.NguoiDungDao;
 import duan1.nhom8.dao.NhanVienDao;
+import duan1.nhom8.helper.DateHelper;
 import duan1.nhom8.helper.DialogHelper;
+import duan1.nhom8.helper.ShareHelper;
 import duan1.nhom8.helper.UHelper;
 import duan1.nhom8.i.NhanVienInterface;
 import duan1.nhom8.model.NguoiDung;
@@ -17,8 +19,11 @@ import java.awt.HeadlessException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,41 +37,12 @@ public class NhanVienImpl implements NhanVienInterface {
     NhanVienDao dao = new NhanVienDao();
 
     @Override
-    public void fillCombobox(JComboBox cbbNguoiDung) {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cbbNguoiDung.getModel();
-        model.removeAllElements();
-        try {
-            List<NguoiDung> list = nguoiDungDao.selectNv();
-            for (NguoiDung nd : list) {
-                model.addElement(nd);
-            }
-        } catch (Exception e) {
-            DialogHelper.alert(null, "Lỗi truy vấn combobox");
-        }
-    }
-
-    @Override
-    public void selectCombobox(JComboBox cbbNguoiDung, JTextField txtHoTen, JTextField txtSDT, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu) {
-//        fillCombobox(cbbNguoiDung);
-        NguoiDung nguoiDung = (NguoiDung) cbbNguoiDung.getSelectedItem();
-        txtHoTen.setText(nguoiDung.getHoTen());
-        txtEmail.setText(nguoiDung.getEmail());
-        txtSDT.setText(nguoiDung.getSoDienThoai());
-        if (nguoiDung.isGioiTinh()) {
-            rbNam.setSelected(true);
-        }
-        if (!nguoiDung.isGioiTinh()) {
-            rbNu.setSelected(true);
-        }
-    }
-
-    @Override
     public void load(JTable tbDSNV, JTextField txtTimKiem) {
         DefaultTableModel model = (DefaultTableModel) tbDSNV.getModel();
         model.setRowCount(0);
         try {
             String keyword = txtTimKiem.getText();
-            List<NguoiDungNhanVien> list = dao.selectByKeyword(keyword, keyword, keyword, keyword, keyword, keyword, keyword);
+            List<NguoiDungNhanVien> list = dao.selectByKeyword(keyword, keyword, keyword, keyword, keyword, keyword, keyword, keyword, keyword);
 //            List<NguoiDungNhanVien> list = dao.select();            
             for (NguoiDungNhanVien ndnv : list) {
                 int lung = (int) ndnv.getLuong();
@@ -75,10 +51,14 @@ public class NhanVienImpl implements NhanVienInterface {
                     ndnv.getCaLamViec(),
                     lung,
                     ndnv.getMaNguoiDung(),
+                    ndnv.getMatKhau(),
                     ndnv.getHoTen(),
+                    DateHelper.toString(ndnv.getNgaySinh()),
                     ndnv.isGioiTinh() ? "Nam" : "Nữ",
                     ndnv.getSoDienThoai(),
-                    ndnv.getEmail()                      
+                    ndnv.getEmail(),
+                    ndnv.getDiaChi(),
+                    ndnv.getHinhAnh()
                 };
                 model.addRow(row);
             }
@@ -87,12 +67,11 @@ public class NhanVienImpl implements NhanVienInterface {
     }
 
     @Override
-    public boolean save(JTextField txtCaLamViec, JTextField txtLuong, JComboBox cbbNguoiDung) {
-        NguoiDung nguoiDung = (NguoiDung) cbbNguoiDung.getSelectedItem();
+    public boolean save(JTextField txtCaLamViec, JTextField txtLuong, JTextField txtTaiKhoan) {
         NhanVien model = new NhanVien();
         model.setCaLamViec(Integer.parseInt(txtCaLamViec.getText()));
         model.setLuong(Float.parseFloat(txtLuong.getText()));
-        model.setMaNguoiDung(nguoiDung.getMaNguoiDung());
+        model.setMaNguoiDung(txtTaiKhoan.getText());
         try {
             if (!UHelper.checkNull(txtLuong, "Lương")) {
                 return false;
@@ -108,24 +87,31 @@ public class NhanVienImpl implements NhanVienInterface {
     }
 
     @Override
-    public boolean edit(JTable tbDSNV, int index, JComboBox cbbNguoiDung, JTextField txtMaNV, JTextField txtLuong, JTextField txtCaLamViec, JTextField txtHoTen, JTextField txtSDT, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu) {
+    public boolean edit(JTable tbDSNV, int index, JTextField txtMaNV, JTextField txtCaLamViec, JTextField txtLuong, JTextField txtTaiKhoan, JPasswordField txxMatKhau, JTextField txtHoVaTen, JTextField txtNgaySinh, JTextField txtSoDienThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh) {
         Integer maNV = (Integer) tbDSNV.getValueAt(index, 0);
         NguoiDungNhanVien model = dao.findById(maNV);
         if (model != null) {
-            cbbNguoiDung.setToolTipText(String.valueOf(model.getMaNhanVien()));
-            cbbNguoiDung.getModel().setSelectedItem(nguoiDungDao.findById(model.getMaNguoiDung()));
             txtMaNV.setText(String.valueOf(model.getMaNhanVien()));
             txtCaLamViec.setText(String.valueOf(model.getCaLamViec()));
             int lung = (int) model.getLuong();
             txtLuong.setText(String.valueOf(lung));
-            txtHoTen.setText(model.getHoTen());
+            txtTaiKhoan.setText(model.getMaNguoiDung());
+            txxMatKhau.setText(model.getMatKhau());
+            txtHoVaTen.setText(model.getHoTen());
+            txtNgaySinh.setText(DateHelper.toString(model.getNgaySinh()));
+            txtSoDienThoai.setText(model.getSoDienThoai());
             txtEmail.setText(model.getEmail());
-            txtSDT.setText(model.getSoDienThoai());
             if (model.isGioiTinh()) {
                 rbNam.setSelected(true);
             }
             if (!model.isGioiTinh()) {
                 rbNu.setSelected(true);
+            }
+            txtDiaChi.setText(model.getDiaChi());
+            if (model.getHinhAnh() != null) {
+                lblHinhAnh.setIcon(ShareHelper.readLogo(model.getHinhAnh()));
+            } else {
+                lblHinhAnh.setIcon(null);
             }
             return true;
         }
@@ -133,12 +119,11 @@ public class NhanVienImpl implements NhanVienInterface {
     }
 
     @Override
-    public boolean update(JTextField txtCaLamViec, JTextField txtLuong, JComboBox cbbNguoiDung, JTextField txtMaNV) {
-        NguoiDung nguoiDung = (NguoiDung) cbbNguoiDung.getSelectedItem();
+    public boolean update(JTextField txtCaLamViec, JTextField txtTaiKhoan, JTextField txtLuong, JTextField txtMaNV) {
         NhanVien model = new NhanVien();
         model.setCaLamViec(Integer.parseInt(txtCaLamViec.getText()));
         model.setLuong(Float.parseFloat(txtLuong.getText()));
-        model.setMaNguoiDung(nguoiDung.getMaNguoiDung());
+        model.setMaNguoiDung(txtTaiKhoan.getText());
         model.setMaNhanVien(Integer.parseInt(txtMaNV.getText()));
         try {
             if (!UHelper.checkNull(txtLuong, "Lương")) {
@@ -167,5 +152,4 @@ public class NhanVienImpl implements NhanVienInterface {
         }
         return false;
     }
-
 }

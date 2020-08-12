@@ -7,8 +7,10 @@ package duan1.nhom8.i;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -16,11 +18,9 @@ import javax.swing.JTextField;
  * @author User
  */
 public interface NhanVienInterface {
-    void fillCombobox(JComboBox cbbNguoiDung);
-    void selectCombobox(JComboBox cbbNguoiDung, JTextField txtHoTen, JTextField txtSDT, JTextField txtEmail, JRadioButton rdNam, JRadioButton rdNu);
     void load(JTable tbDSNV, JTextField txtTimKiem);
-    boolean save(JTextField txtCaLamViec, JTextField txtLuong, JComboBox cbbNguoiDung);
-    boolean update (JTextField txtCaLamViec, JTextField txtLuong, JComboBox cbbNguoiDung, JTextField txtMaNV);
+    boolean save(JTextField txtCaLamViec, JTextField txtLuong, JTextField txtTaiKhoan);
+    boolean update (JTextField txtCaLamViec, JTextField txtLuong, JTextField txtTaiKhoan, JTextField txtMaNV);
     boolean delete (JTextField txtMaNV);
-    boolean edit(JTable tbDSNV, int index, JComboBox cbbNguoiDung, JTextField txtMaNV, JTextField txtLuong, JTextField txtCaLamViec, JTextField txtHoTen, JTextField txtSDT, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu);
+    boolean edit(JTable tbDSNV, int index, JTextField txtMaNV, JTextField txtCaLamViec, JTextField txtLuong, JTextField txtTaiKhoan, JPasswordField txxMatKhau, JTextField txtHoVaTen, JTextField txtNgaySinh, JTextField txtSoDienThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh);
 }
