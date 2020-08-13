@@ -101,23 +101,6 @@ public class NguoiDungImpl implements NguoiDungInterface {
     @Override
     public boolean saveKhachHang(JTextField txtTaiKhoan, JPasswordField txxmatKhau, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDienThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh) {
         NguoiDung model = new NguoiDung();
-        model.setMaNguoiDung(txtTaiKhoan.getText());
-        model.setMatKhau(new String(txxmatKhau.getPassword()));
-        model.setVaiTro(false);
-        model.setHoTen(txtHoTen.getText());
-        Date ngaysinh = DateHelper.toDate(txtNgaySinh.getText());
-        java.sql.Date sqlStartDate = new java.sql.Date(ngaysinh.getTime());
-        model.setNgaySinh(sqlStartDate);
-        model.setSoDienThoai(txtSoDienThoai.getText());
-        model.setEmail(txtEmail.getText());
-        if (rbNam.isSelected()) {
-            model.setGioiTinh(true);
-        }
-        if (rbNu.isSelected()) {
-            model.setGioiTinh(false);
-        }
-        model.setDiaChi(txtDiaChi.getText());
-        model.setHinhAnh(lblHinhAnh.getToolTipText());
         try {
             NguoiDung maNgươiDung = dao.findById(txtTaiKhoan.getText());
             NguoiDung email = dao.findByEmail(txtEmail.getText());
@@ -157,6 +140,23 @@ public class NguoiDungImpl implements NguoiDungInterface {
                 DialogHelper.alert(null, "Email không đúng định dạng!");
                 return false;
             }
+            model.setMaNguoiDung(txtTaiKhoan.getText());
+            model.setMatKhau(new String(txxmatKhau.getPassword()));
+            model.setVaiTro(false);
+            model.setHoTen(txtHoTen.getText());
+            Date ngaysinh = DateHelper.toDate(txtNgaySinh.getText());
+            java.sql.Date sqlStartDate = new java.sql.Date(ngaysinh.getTime());
+            model.setNgaySinh(sqlStartDate);
+            model.setSoDienThoai(txtSoDienThoai.getText());
+            model.setEmail(txtEmail.getText());
+            if (rbNam.isSelected()) {
+                model.setGioiTinh(true);
+            }
+            if (rbNu.isSelected()) {
+                model.setGioiTinh(false);
+            }
+            model.setDiaChi(txtDiaChi.getText());
+            model.setHinhAnh(lblHinhAnh.getToolTipText());
             dao.save(model);
             NguoiDoc nguoiDoc = new NguoiDoc();
             nguoiDoc.setMaNguoiDung(txtTaiKhoan.getText());
@@ -165,7 +165,7 @@ public class NguoiDungImpl implements NguoiDungInterface {
         } catch (Exception e) {
             return false;
         }
-    }  
+    }
 
     @Override
     public boolean delete(JTextField txtTaiKhoan) {
@@ -343,23 +343,6 @@ public class NguoiDungImpl implements NguoiDungInterface {
     @Override
     public boolean saveNhanVien(JTextField txtTaiKhoan, JPasswordField txxmatKhau, JTextField txtHoTen, JTextField txtNgaySinh, JTextField txtSoDienThoai, JTextField txtEmail, JRadioButton rbNam, JRadioButton rbNu, JTextArea txtDiaChi, JLabel lblHinhAnh) {
         NguoiDung model = new NguoiDung();
-        model.setMaNguoiDung(txtTaiKhoan.getText());
-        model.setMatKhau(new String(txxmatKhau.getPassword()));
-        model.setVaiTro(true);
-        model.setHoTen(txtHoTen.getText());
-        Date ngaysinh = DateHelper.toDate(txtNgaySinh.getText());
-        java.sql.Date sqlStartDate = new java.sql.Date(ngaysinh.getTime());
-        model.setNgaySinh(sqlStartDate);
-        model.setSoDienThoai(txtSoDienThoai.getText());
-        model.setEmail(txtEmail.getText());
-        if (rbNam.isSelected()) {
-            model.setGioiTinh(true);
-        }
-        if (rbNu.isSelected()) {
-            model.setGioiTinh(false);
-        }
-        model.setDiaChi(txtDiaChi.getText());
-        model.setHinhAnh(lblHinhAnh.getToolTipText());
         try {
             NguoiDung maNgươiDung = dao.findById(txtTaiKhoan.getText());
             NguoiDung email = dao.findByEmail(txtEmail.getText());
@@ -399,6 +382,23 @@ public class NguoiDungImpl implements NguoiDungInterface {
                 DialogHelper.alert(null, "Email không đúng định dạng!");
                 return false;
             }
+            model.setMaNguoiDung(txtTaiKhoan.getText());
+            model.setMatKhau(new String(txxmatKhau.getPassword()));
+            model.setVaiTro(true);
+            model.setHoTen(txtHoTen.getText());
+            Date ngaysinh = DateHelper.toDate(txtNgaySinh.getText());
+            java.sql.Date sqlStartDate = new java.sql.Date(ngaysinh.getTime());
+            model.setNgaySinh(sqlStartDate);
+            model.setSoDienThoai(txtSoDienThoai.getText());
+            model.setEmail(txtEmail.getText());
+            if (rbNam.isSelected()) {
+                model.setGioiTinh(true);
+            }
+            if (rbNu.isSelected()) {
+                model.setGioiTinh(false);
+            }
+            model.setDiaChi(txtDiaChi.getText());
+            model.setHinhAnh(lblHinhAnh.getToolTipText());
             dao.save(model);
             return true;
         } catch (Exception e) {

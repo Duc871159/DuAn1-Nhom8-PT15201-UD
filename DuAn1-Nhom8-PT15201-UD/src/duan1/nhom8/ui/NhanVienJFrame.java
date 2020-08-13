@@ -33,6 +33,10 @@ public class NhanVienJFrame extends javax.swing.JFrame {
     NguoiDungInterface nd = new NguoiDungImpl();
 
     void clear() {
+        txtTaiKhoan.setText("");
+        txxMatKhau.setText("");
+        txtNgaySinh.setText("");
+        txtDiaChi.setText("");
         lblHinhAnh.setIcon(null);
         lblHinhAnh.setToolTipText("");
         txtMaNV.setText("");
@@ -505,7 +509,9 @@ public class NhanVienJFrame extends javax.swing.JFrame {
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         if (nd.saveNhanVien(txtTaiKhoan, txxMatKhau, txtHoTen, txtNgaySinh, txtSoDienThoai, txtEmail, rbNam, rbNu, txtDiaChi, lblHinhAnh)) {
+            System.out.println("Them TaiKhoan");
             if (nv.save(txtCaLamViec, txtLuong, txtTaiKhoan)) {
+                System.out.println("Them NhanVien");
                 nv.load(tbDSNV, txtTimKiem);
                 DialogHelper.alert(this, "Thêm thành công");
             }

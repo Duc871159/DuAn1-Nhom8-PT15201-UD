@@ -57,7 +57,7 @@ public class NguoiDungDao {
     }
 
     public void save(NguoiDung model) {
-        String sql = "INSERT INTO NguoiDung (maNguoiDung, MatKhau, vaiTro, HoTen, diaChi, gioiTinh, ngaySinh, email, soDienThoai, hinhAnh) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "Insert Into NguoiDung (maNguoiDung, MatKhau, vaiTro, HoTen, diaChi, gioiTinh, ngaySinh, email, soDienThoai, hinhAnh) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             JdbcHelper.executeUpdate(sql,
                     model.getMaNguoiDung(),
