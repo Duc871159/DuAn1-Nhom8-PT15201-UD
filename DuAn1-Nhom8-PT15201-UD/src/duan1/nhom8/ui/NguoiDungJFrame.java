@@ -71,6 +71,8 @@ public class NguoiDungJFrame extends javax.swing.JFrame {
     }
     
     void clear(){
+        lblHinhAnh.setIcon(null);
+        lblHinhAnh.setToolTipText("");
         txtHoVaTen.setText("");
         txtTaiKhoan.setText("");
         txxMatKhau.setText("");

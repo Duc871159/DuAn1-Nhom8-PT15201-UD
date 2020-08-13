@@ -112,6 +112,7 @@ public class NhanVienImpl implements NhanVienInterface {
                 lblHinhAnh.setIcon(ShareHelper.readLogo(model.getHinhAnh()));
             } else {
                 lblHinhAnh.setIcon(null);
+                lblHinhAnh.setToolTipText("");
             }
             return true;
         }

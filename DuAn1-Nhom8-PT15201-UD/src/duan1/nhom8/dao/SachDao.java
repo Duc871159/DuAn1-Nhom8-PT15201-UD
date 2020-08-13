@@ -59,9 +59,9 @@ public class SachDao {
     }
     
     //Lấy danh sách sách trừ những sách đã có trong phiếu mượn
-    public List<Sach> selectByTrangThaiSach(Integer maPM) {
-        String sql = "Select * from sach where soLuong > 0 and maSach not in (Select maSach from trangThaiSach where maPhieuMuon = ?)";
-        return select(sql, maPM);
+    public List<Sach> selectByTrangThaiSach(Integer maPM, String key1, String key2, String key3, String key4, String key5) {
+        String sql = "Select * from sach where soLuong > 0 and maSach not in (Select maSach from trangThaiSach where maPhieuMuon = ?) and (tenSach like ? or loaiSach like ? or tacGia like ? or nhaXuatBan like ? or viTri like ?)";
+        return select(sql, maPM, "%" + key1 + "%", "%" + key2 + "%", "%" + key3 + "%", "%" + key4 + "%", "%" + key5 + "%");
     }
     
     public void updateMuon(Sach model) {

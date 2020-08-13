@@ -226,6 +226,7 @@ public class NguoiDungImpl implements NguoiDungInterface {
                     lblHinhAnh.setIcon(ShareHelper.readLogo(model.getHinhAnh()));
                 } else {
                     lblHinhAnh.setIcon(null);
+                    lblHinhAnh.setToolTipText("");
                 }
                 return true;
             }

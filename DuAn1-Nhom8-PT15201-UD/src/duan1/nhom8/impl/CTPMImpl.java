@@ -36,11 +36,12 @@ public class CTPMImpl implements CTPMInterface {
     TrangThaiSachDao dao = new TrangThaiSachDao();
 
     @Override
-    public void fillCombobox(JComboBox cbbSach, Integer maPM) {
+    public void fillCombobox(JComboBox cbbSach, Integer maPM, JTextField txtTimKiem) {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cbbSach.getModel();
         model.removeAllElements();
         try {
-            List<Sach> list = sachDao.selectByTrangThaiSach(maPM);
+            String keyword = txtTimKiem.getText();
+            List<Sach> list = sachDao.selectByTrangThaiSach(maPM, keyword, keyword, keyword, keyword, keyword);
             for (Sach s : list) {
                 model.addElement(s);
             }

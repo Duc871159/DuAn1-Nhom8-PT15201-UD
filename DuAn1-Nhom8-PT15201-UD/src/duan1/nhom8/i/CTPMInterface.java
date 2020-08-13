@@ -15,7 +15,7 @@ import javax.swing.JTextField;
  * @author User
  */
 public interface CTPMInterface {
-    void fillCombobox(JComboBox cbbSach, Integer maPM);
+    void fillCombobox(JComboBox cbbSach, Integer maPM, JTextField txtTimKiem);
     void load(JTable tbSachMuon, Integer maPM);
     boolean save(JComboBox cbbSach, Integer maPM);
     boolean update(JTextField txtMaTT, JRadioButton rbChuaTra, JRadioButton rbDaTra);

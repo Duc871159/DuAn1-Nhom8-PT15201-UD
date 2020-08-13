@@ -33,6 +33,8 @@ public class NhanVienJFrame extends javax.swing.JFrame {
     NguoiDungInterface nd = new NguoiDungImpl();
 
     void clear() {
+        lblHinhAnh.setIcon(null);
+        lblHinhAnh.setToolTipText("");
         txtMaNV.setText("");
         txtLuong.setText("");
         txtCaLamViec.setText("");

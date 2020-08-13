@@ -147,6 +147,7 @@ public class SachImpl implements SachInterface {
                     lblHinhAnh.setIcon(ShareHelper.readLogo(model.getHinhAnh()));
                 } else {
                     lblHinhAnh.setIcon(null);
+                    lblHinhAnh.setToolTipText("");
                 }
                 return true;
             }

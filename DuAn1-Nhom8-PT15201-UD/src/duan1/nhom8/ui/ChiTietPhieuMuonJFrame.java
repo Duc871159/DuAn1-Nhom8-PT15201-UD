@@ -22,7 +22,7 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
     public ChiTietPhieuMuonJFrame(int maPM) {
         initComponents();
         this.maPM = maPM;
-        ctpm.fillCombobox(cbbSach, maPM);
+        ctpm.fillCombobox(cbbSach, maPM, txtTimKiem);
         ctpm.load(tbSachMuon, maPM);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -65,6 +65,8 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         cbbSach = new javax.swing.JComboBox<>();
         btThem = new javax.swing.JButton();
+        txtTimKiem = new javax.swing.JTextField();
+        btTimKiem = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbSachMuon = new javax.swing.JTable();
@@ -106,21 +108,37 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
             }
         });
 
+        btTimKiem.setText("Tìm kiếm");
+        btTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTimKiemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cbbSach, 0, 1, Short.MAX_VALUE)
+                .addComponent(cbbSach, 0, 419, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btThem, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btTimKiem)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btTimKiem))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbbSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btThem))
@@ -178,8 +196,9 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -199,9 +218,9 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(123, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
@@ -374,7 +393,7 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
                     .addComponent(btTruoc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btDau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btCuoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Chi tiết", jPanel5);
@@ -401,7 +420,7 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         if (ctpm.save(cbbSach, maPM)) {
-            ctpm.fillCombobox(cbbSach, maPM);
+            ctpm.fillCombobox(cbbSach, maPM, txtTimKiem);
             ctpm.load(tbSachMuon, maPM);
             DialogHelper.alert(this, "Thêm sách thành công");
         }
@@ -464,7 +483,7 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         if (ctpm.delete(tbSachMuon, txtMaTrangThai)) {
-            ctpm.fillCombobox(cbbSach, maPM);
+            ctpm.fillCombobox(cbbSach, maPM, txtTimKiem);
             ctpm.load(tbSachMuon, maPM);
             DialogHelper.alert(this, "Xóa thành công");
         }
@@ -472,7 +491,7 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
         if (ctpm.update(txtMaTrangThai, rbChuaTra, rbDaTra)) {
-            ctpm.fillCombobox(cbbSach, maPM);
+            ctpm.fillCombobox(cbbSach, maPM, txtTimKiem);
             ctpm.load(tbSachMuon, maPM);
             if (rbDaTra.isSelected()) {
                 this.setStatus(false);
@@ -481,6 +500,10 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btSuaActionPerformed
+
+    private void btTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimKiemActionPerformed
+        ctpm.fillCombobox(cbbSach, maPM, txtTimKiem);
+    }//GEN-LAST:event_btTimKiemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -524,6 +547,7 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btSau;
     private javax.swing.JButton btSua;
     private javax.swing.JButton btThem;
+    private javax.swing.JButton btTimKiem;
     private javax.swing.JButton btTruoc;
     private javax.swing.JButton btXoa;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -549,6 +573,7 @@ public class ChiTietPhieuMuonJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtNgayTra;
     private javax.swing.JTextField txtTenSach;
     private javax.swing.JTextField txtTheLoai;
+    private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtViTri;
     // End of variables declaration//GEN-END:variables
 }
